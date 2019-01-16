@@ -32,6 +32,8 @@
     <div class="container-fluid">
         <div class="row justify-content-md-center">
             <div class="col-md-7">
+<<<<<<< HEAD
+=======
                 <br>
                 <h6 class="text-center"><i class="fa fa-star" aria-hidden="true"></i> Top Herramientas de Verificación</h6>
                 <br>
@@ -72,10 +74,30 @@
 
 
 
+>>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
                 <!--Listado de Selección de APIS-->
                 <div class="form-group">
                     <label for="Selecciona el API"></label>
                     <select class="form-control" name="apis" id="apis">
+<<<<<<< HEAD
+                        <option value="0">APIS MERCADO ENVIOS</option>
+                        <option value="meapi">CONFIGURACIÓN DE ENVÍO EN CUENTA</option>
+                        <option value="meapi">COSTOS DE ENVÍO</option>
+                        <option value="meapi">ETIQUETA ML</option>
+                        <option value="meapi">INFORMACIÓN DE ENVÍO EN ORDEN</option>                     
+                    </select>
+                </div>
+                <!--Contenedor de selector de apis-->
+                <div id="seleccapis">
+                    <div id="api-6" class="seccapi">
+                        <div class="card text-left">
+                            <img class="card-img-top" src="holder.js/100px180/" alt="">
+                            <div class="card-body">
+                                <p class="card-title">Configuración de envío en cuenta</p>
+                                <p class="card-text">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="user_opid" id="user_opid" placeholder="Ingresa el User Id">
+=======
                                                 <option value="0">LISTADO DE APIS</option>
                                                 <option value="api-1">APLICACIONES</option>
                                                 <option value="api-2">BALANCE</option>
@@ -122,14 +144,20 @@
                                 <p class="card-text">
                                     <div class="form-group">
                                         <input type="number" class="form-control" name="clientid" id="clientid" placeholder="Ingresa Client ID">
+>>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
                                     </div>
                                     <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
                                 <div class="descripcion">
                                     <div class="descripcion-inn">
                                         <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                         <div class="description-content">
+<<<<<<< HEAD
+                                            <p><b>Funcionamiento:</b></p>
+                                            <p><b>Descripción:</b></p>
+=======
                                             <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
                                             <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
+>>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
                                         </div>
                                     </div>
                                 </div>
@@ -137,6 +165,19 @@
                         </div>
                         <br>
                     </div>
+<<<<<<< HEAD
+                    <!--6---API-DE-COSTOS-DE-ENVÍO-------->
+                    <div id="api-6" class="seccapi">
+                        <div class="card text-left">
+                            <img class="card-img-top" src="holder.js/100px180/" alt="">
+                            <div class="card-body">
+                                <p class="card-title">Costos de Envío</p>
+                                <p class="card-text">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="user_opid" id="user_opid" placeholder="Ingresa el User Id">
+                                    </div>
+                                    <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+=======
                     <!--2---API-DE-BALANCE--------------------------------------->
                     <div id="api-2" class="seccapi">
                         <br>
@@ -362,17 +403,72 @@
                                     </div>
                                     <button type="button" id="ejapi-30" class="btn btn-success btn-sm" onclick="buscarPoint()">Ejecutar API</button></p>
                                 <h3 id="resultado-point">Resultado:</h3>
+>>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
                                 <div class="descripcion">
                                     <div class="descripcion-inn">
                                         <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                                         <div class="description-content">
+<<<<<<< HEAD
+                                            <p><b>Funcionamiento:</b></p>
+                                            <p><b>Descripción:</b></p>
+=======
                                             <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
                                             <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
+>>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
+                        <br>
+                    </div>
+                    <!--13--API-DE-ETIQUETA ML----------------------------------->
+                    <div class="card text-left">
+                        <img class="card-img-top" src="holder.js/100px180/" alt="">
+                        <div class="card-body">
+                            <p class="card-title">Generar Etiqueta</p>
+                            <p class="card-text">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="shippmentlabelid" id="shippmentlabelid" placeholder="Ingresa el Shipping Id">
+                                </div>
+                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                            <div class="descripcion">
+                                <div class="descripcion-inn">
+                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="description-content">
+                                        <p><b>Funcionamiento:</b></p>
+                                        <p><b>Descripción:</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div id="api-6" class="seccapi">
+                    <div class="card text-left">
+                        <img class="card-img-top" src="holder.js/100px180/" alt="">
+                        <div class="card-body">
+                            <p class="card-title">Información de envío en orden</p>
+                            <p class="card-text">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="user_opid" id="user_opid" placeholder="Ingresa el Shipping Id">
+                                </div>
+                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                            <div class="descripcion">
+                                <div class="descripcion-inn">
+                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                    <div class="description-content">
+                                        <p><b>Funcionamiento:</b></p>
+                                        <p><b>Descripción:</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+=======
                     </div>
                     <!--31--API-DE-USUARIO CONFIABLE----------------------------->
                     <div id="api-31" class="seccapi">
@@ -388,10 +484,30 @@
                         <br>
                         <p><b>Funcionamiento:</b></p>
                     </div>
+>>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+    </div>
+    <div class="menu-container">
+        <nav class="menu">
+            <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+            <label class="menu-open-button" for="menu-open">
+                        <span class="lines line-1"></span>
+                        <span class="lines line-2"></span>
+                        <span class="lines line-3"></span>
+                      </label>
+            <a href="api_ml.html" class="menu-item purple"> <img src="Images/Vendedor.png" width="100%"> </a>
+            <a href="api_ms.html" class="menu-item blue"> <img src="Images/Mercado Shops.png" width="100%"> </a>
+            <a href="api_me.html" class="menu-item lightblue"> <img src="Images/Mercado Envíos.png" width="100%"></a>
+            <a href="api_mp.html" class="menu-item orange"> <img src="Images/Mercado Pago.png" width="100%"> </a>
+
+        </nav>
+    </div>
+=======
+>>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
     <footer class="footer-me">
         <div class="container-fluid">
             <p class="text-center"><small>CX Mercado Libre. <i class="far fa-copyright" aria-hidden="true"></i></small></p>

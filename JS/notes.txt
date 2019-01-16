@@ -1,7 +1,4 @@
 $(document).ready(function() {
-<<<<<<< HEAD
-
-=======
     //Mostrar Sección de la Api
     $("#apis").on("change", function() {
         var selectApi = $(this).val();
@@ -1128,87 +1125,14 @@ $(document).ready(function() {
             $("#api-32").addClass("seccapi");
         } else {}
 
-    });
->>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
-    //Este script muestra elementos dentro de los bloques como lo son la descripción o instrucciones de uso.
-    //Llama el bloque del acordeón.
-    $('.accordion-toggle').on('click', function(event) {
-        event.preventDefault();
-        // Crea las variables del aordeón
-        var accordion = $(this);
-        var accordionContent = accordion.next('.description-content');
-
-        // Activa el acordeón realizando una apertura
-        accordion.toggleClass("open");
-        // toggle accordion content
-        accordionContent.slideToggle(250);
-        accordionContent.removeClass("description-content");
-        accordionContent.addClass("description-content");
-    });
-
-    function popitup(url) {
-        newwindow = window.open(url, 'name', 'height=200,width=600');
-        if (window.focus) { newwindow.focus() }
-        return false;
-    }
-});
-document.addEventListener('DOMContentLoaded', function() {
-    var checkPageButton = document.getElementById('apis_lib');
-    checkPageButton.addEventListener('click', function() {
-        chrome.tabs.getSelected(null, function(tab) {
-            d = document
-            var f = d.createElement('a');
-<<<<<<< HEAD
-            f.onclick = window.open('api_app.html', '_blank', 'width=400,height=900', 'titlebar=no', 'status=no', 'location=no', 'left=100', );
-=======
-            f.onclick = window.open('api_ml.html', '_blank', 'width=300,height=900', 'titlebar=no', 'status=no', 'location=no', 'left=100', );
->>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
-            f.href = "#"
-            d.body.appendChild(f);
-        });
-    }, false);
-}, false);
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    var checkPageButton = document.getElementById('arbol_deriv');
-    checkPageButton.addEventListener('click', function() {
-        chrome.tabs.getSelected(null, function(tab) {
-            d = document
-            var f = d.createElement('a');
-            f.onclick = window.open('arbol.html', '_blank', 'width=300,height=500', 'titlebar=no', 'status=no', 'location=no', 'left=100', );
-            f.href = "#"
-            d.body.appendChild(f);
-        });
-    }, false);
-<<<<<<< HEAD
-}, false);
-=======
-}, false);
-
-//Asigno el evento "click" del botón para provoar el copiado
-document.getElementById('btnCopiar').addEventListener('click', copiarAlPortapapeles);
-
-//Función que lanza el copiado del código
-function copiarAlPortapapeles(ev) {
-    var codigoACopiar = document.getElementById('textoACopiar'); //Elemento a copiar
-    //Debe estar seleccionado en la página para que surta efecto, así que...
-    var seleccion = document.createRange(); //Creo una nueva selección vacía
-    seleccion.selectNodeContents(codigoACopiar); //incluyo el nodo en la selección
-    //Antes de añadir el intervalo de selección a la selección actual, elimino otros que pudieran existir (sino no funciona en Edge)
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(seleccion); //Y la añado a lo seleccionado actualmente
-    try {
-        var res = document.execCommand('copy'); //Intento el copiado
-        if (res)
-            exito();
-        else
-            fracaso();
-
-        mostrarAlerta();
-    } catch (ex) {
-        excepcion();
-    }
-    window.getSelection().removeRange(seleccion);
-}
->>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
+<select class="form-control" name="sitesbank" id="sitesbank">
+                                        <option value="0">Selecciona el Site</option>
+                                        <option value="MLABank">MLA</option>
+                                        <option value="MLMBank">MLM</option>
+                                        <option value="MLCBank">MLC</option>
+                                        <option value="MCOBank">MCO</option>
+                                        <option value="MLUBank">MLU</option>
+                                        <option value="MPEBank">MPE</option>
+                                    </select>
