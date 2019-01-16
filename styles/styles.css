@@ -18,11 +18,7 @@ Chat Mercado Libre Colombia.
 
 /*Oculta la sección de Apis*/
 
-<<<<<<< HEAD
 body-e {
-=======
-body {
->>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
     background-color: darkgrey;
 }
 
@@ -32,13 +28,10 @@ body {
     background-color: #FFE82C;
 }
 
-<<<<<<< HEAD
-=======
 .seccapi {
     display: none;
 }
 
->>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
 
 /*Muestra el API elegido*/
 
@@ -60,7 +53,6 @@ body {
 
 .footer-meli {
     background-color: #FFE82C;
-<<<<<<< HEAD
     position: sticky;
     bottom: 0;
     width: 100%;
@@ -94,14 +86,11 @@ body {
 
 .footer-me {
     background-color: #AADB1D;
-=======
->>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
     position: static;
     bottom: 0;
     width: 100%;
     height: 40px;
     color: midnightblue;
-<<<<<<< HEAD
 }
 
 
@@ -266,6 +255,4 @@ body {
     -webkit-transition-duration: 480ms;
     /* -webkit-transform: translate3d(90.9466px, -52.47586px, 0); */
     transform: translate3d(-55px, -90px, 0);
-=======
->>>>>>> 611bea5fe06a4ce883f002140f9efb9f9f4adcd8
 }
