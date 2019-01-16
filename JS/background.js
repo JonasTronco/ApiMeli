@@ -5,7 +5,107 @@
 /*********************/
 
 /***LISTADO DE APIS***/
+let mercadoEnvios = [
+    {
+        nombre : "Carrito paquetes en una misma etiqueta",
+        descripcion: "Se puede ver si el user Seller decidió que va a querer enviar varios productos en un mismo paquete o no",
+        url:"https://api.mercadolibre.com/users/XXXXXXX/shipping_preferences",
+        habilitado:true
+    },
+    
+    {
+        nombre : "Codigo postal de MLM",
+        descripcion: "Acá podremos saber si el código postal está activo ",
+        url: "https://api.mercadolibre.com/countries/MX/zip_codes/XXXXXX",
+        habilitado:true
+    },
+    {
+        nombre : "Etiqueta ML",
+        descripcion: "Nos permite validar una etiqueta generada a un seller sin necesidad de darle Click en Imprimir etiqueta",
+        url: "https://api.mercadolibre.com/shipment_labels?shipment_ids=XXX&savePdf=Y&access_token=XXXXXXXX",
+        habilitado:false
+    },
+    {
+        nombre : "Formas de envios por Site",
+        descripcion: "Muestra los distintos shippings habilitados en el site",
+        url: "https://api.mercadolibre.com/sites/XXX/shipping_methods",
+        habilitado:false
+    },
+]
 
+let mercadoPago = [
+    
+    {
+        nombre : "Balance",
+        descripcion: "Podemos verificar el dinero de la cuenta de cada usuario, ver cuánto tiene disponible, retenido y por qué, en reclamo, etc.",
+        url:"https://api.mercadolibre.com/users/XXXXXX/mercadopago_account/balance?access_token=XXXXX",
+        habilitado:false
+    },
+    {
+        nombre : "Bancos Aceptados para Retiros",
+        descripcion: "Esta API nos ayudará a ver qué bancos son aceptados para retiros",
+        url: "https://api.mercadolibre.com/sites/MLM/withdrawals/accepted_banks",
+        habilitado:false
+    },
+    {
+        nombre : "Bloqueo por VISA",
+        descripcion: "Nos servirá para ver si un usuario está bloqueado para recibir pagos con visa",
+        url:"https://api.mercadolibre.com/users/XXXXXXXX/accepted_payment_methods/visa?marketplace=MELI",
+        habilitado:false
+    },
+    {
+        nombre : "Item en B=P",
+        descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
+        url:"https://api.mercadolibre.com/immediate_payment/validate?item_id=XXXXXXXXXXX ",
+        habilitado:false
+    }
+
+]
+
+let mercadoShops = [{
+    nombre : ""
+}]
+let mercadoVendedor = [
+    {
+        nombre : "Comercial",
+        descripcion: "Permite ver el nombre de la campaña en la cual está el producto",
+        url:"https://api.mercadolibre.com/deals/XXXXXX",
+        habilitado:false
+    },
+    {
+        nombre : "Aplicaciones",
+        descripcion: "Permiter reconocer que aplicación realizó el cambio que vemos reflejado en zeus por el client id",
+        url: "https://api.mercadolibre.com/applications/XXXXXXXXX",
+        habilitado:false
+    },
+    
+    {
+        nombre : "Categorias",
+        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
+        url: "https://api.mercadolibre.com/categories/XXXXXXX",
+        habilitado:false
+    },
+
+    {
+        nombre : "Credit Level",
+        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
+        url: "https://api.mercadolibre.com/categories/XXXXXXX",
+        habilitado:false
+    },
+
+    {
+        nombre : "E-Shop",
+        descripcion: "En esta APi podremos ver cuando se activó un E-shop",
+        url: "https://api.mercadolibre.com/eshops/search?seller_id=XXXXXXXX",
+        habilitado:false
+    },
+    {
+        nombre : "Item",
+        descripcion: "Permite ver si un producto está en campaña comercial, ver el tamaño de las fotos que tiene cargadas, así como las dimensiones del producto",
+        url: "https://api.mercadolibre.com/items/XXXXXXXXXX",
+        habilitado:false
+    }
+]
 /*--1---API-DE-APLICACIONES---------------------------------*/
 /*--2---API-DE-BALANCE--------------------------------------*/
 /*--3---API-DE-BANCOS ACEPTADOS PARA RETIROS----------------*/
@@ -76,6 +176,14 @@ const URL_TITULARIDAD = 'https://api.mercadolibre.com/point/services/poi/BBPOS-'
 let SERIAL /*Test: 01099942713844*/
 let URL_COMPLETA
 
+/*----------Vue.js--------------*/
+let listMercadoEnvios = new Vue ({
+    el:'#listApp',
+    data: {mercadoEnvios}
+})
+
+
+
 window.addEventListener('load', function() {
     let IDE_BOTOM = document.getElementById("ejapi-30");
     let IDE_BOTOM2 = document.getElementById("ejapi-30");
@@ -94,11 +202,11 @@ function buscarPoint() {
         })
 }
 
-function addElement(data) {
-    document.getElementById("resultado-point").innerHTML = `El dueño es: ${data.user_id}`;
-}
+
 
 /*------API-DE-USUARIO CONFIABLE----------------------------*/
+
+
 /*------API-DE-VALIDACIÓN CÓDIGO UNIVERSAL DE PRODUCTO------*/
 
 
@@ -114,10 +222,6 @@ function addElement(data) {
 
 const OPTS = { crossDomain: true };
 let promese
-
-
-
-
 
 function consulta(URL_COMPLETA, OPTS) {
     promese = new Promise((resolve, reject) => {
@@ -159,3 +263,4 @@ function buscarCobro() {
             alert("Revisa el Serial")
         })
 }
+
