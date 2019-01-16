@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <title>Apis Mercado Libre</title>
+
+    <!--jQuery-->
+    <script type="text/javascript" src="JS/jquery-3.3.1.min.js"></script>
+    <!-- Optional JavaScript -->
+    <script type="text/javascript" src="JS/visual_option.js"></script>
+    <script type="text/javascript" src="JS/background.js"></script>
+    <!-- Popper.js & Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--CSS Local-->
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+</head>
+
+<body class="body-e">
+    <header>
+        <nav class="navbar navbar-lg-7 navbar-dark" style="background-color: #FFE82C;">
+            <h6 class="text-center"><i class="fas fa-book"></i> Biblioteca de API'S| MercadoLibre Vendedor</h6>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-md-7">
+                <!--Listado de Selección de APIS-->
+                <div class="form-group">
+                    <label for="Selecciona el API"></label>
+                    <select class="form-control" name="apis" id="apis">
+                        <!-- Todas las opciones que figuran comentadas son contempladas como
+                        actualizaciones posteriores al 25-01  -->
+                            <!-- <option value="mlapi-">CAMPAÑA COMERCIAL</option> -->
+                            <option value="mlapi-">INFORMACIÓN DE CATEGORÍAS</option>
+                            <option value="mlapi-">INFORMACIÓN DE CUENTA</option>
+                            <option value="mlapi-">INFORMACIÓN DE ÍTEMS</option>
+                            <option value="mlapi-">INFORMACIÓN DE ÓRDENES</option>
+                            <option value="mlapi-">PRODUCT ADS</option> 
+                    </select>
+                </div>
+                <!--Contenedor de selector de apis-->
+                <div id="seleccapis">
+                    <!--7---API-DE-CATEGORÍAS------------------------------------>
+                    <div id="api-7" class="seccapi">
+                        <div class="card text-left">
+                            <img class="card-img-top" src="holder.js/100px180/" alt="">
+                            <div class="card-body">
+                                <p class="card-title">Información de Categorías</p>
+                                <p class="card-text">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="categoryid" id="categoryid" placeholder="Ingresa ID de la categoría">
+                                    </div>
+                                    <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                                <div class="descripcion">
+                                    <div class="descripcion-inn">
+                                        <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="description-content">
+                                            <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
+                                            <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <!--1---API-DE--INFORMACIÓN--DE--CUENTA--------------------------->
+                    <div id="api-1" class="seccapi">
+                        <div class="card text-left">
+                            <img class="card-img-top" src="holder.js/100px180/" alt="">
+                            <div class="card-body">
+                                <p class="card-title">Información de Cuenta</p>
+                                <p class="card-text">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="clientid" id="clientid" placeholder="Ingresa Client ID">
+                                    </div>
+                                    <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                                <div class="descripcion">
+                                    <div class="descripcion-inn">
+                                        <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="description-content">
+                                            <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
+                                            <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <!--16--API-DE-ÍTEMS----------------------------------------->
+                    <div id="api-16" class="seccapi">
+                        <div class="card text-left">
+                            <img class="card-img-top" src="holder.js/100px180/" alt="">
+                            <div class="card-body">
+                                <p class="card-title">Información de Ítems</p>
+                                <p class="card-text">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="itemid" id="itemid" placeholder="Ingresa el Item ID">
+                                    </div>
+                                    <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                                <div class="descripcion">
+                                    <div class="descripcion-inn">
+                                        <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="description-content">
+                                            <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
+                                            <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <!--27--API-DE-ORDERS---------------------------------------->
+                    <div id="api-27" class="seccapi">
+                        <div class="card text-left">
+                            <img class="card-img-top" src="holder.js/100px180/" alt="">
+                            <div class="card-body">
+                                <p class="card-title">Información de Órdenes</p>
+                                <p class="card-text">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="itemid" id="itemid" placeholder="Ingresa el Item ID">
+                                    </div>
+                                    <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                                <div class="descripcion">
+                                    <div class="descripcion-inn">
+                                        <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="description-content">
+                                            <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
+                                            <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div id="api-27" class="seccapi">
+                        <div class="card text-left">
+                            <img class="card-img-top" src="holder.js/100px180/" alt="">
+                            <div class="card-body">
+                                <p class="card-title">Información Product Ads</p>
+                                <p class="card-text">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="useridads" id="useridads" placeholder="Ingresa el Item ID">
+                                    </div>
+                                    <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                                <div class="descripcion">
+                                    <div class="descripcion-inn">
+                                        <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                        <div class="description-content">
+                                            <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
+                                            <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-container">
+        <nav class="menu">
+            <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+            <label class="menu-open-button" for="menu-open">
+                        <span class="lines line-1"></span>
+                        <span class="lines line-2"></span>
+                        <span class="lines line-3"></span>
+                      </label>
+            <a href="api_ml.html" class="menu-item purple"> <img src="Images/Vendedor.png" width="100%"> </a>
+            <a href="api_ms.html" class="menu-item blue"> <img src="Images/Mercado Shops.png" width="100%"> </a>
+            <a href="api_me.html" class="menu-item lightblue"> <img src="Images/Mercado Envíos.png" width="100%"></a>
+            <a href="api_mp.html" class="menu-item orange"> <img src="Images/Mercado Pago.png" width="100%"> </a>
+
+        </nav>
+    </div>
+    <footer class="footer-meli">
+        <div class="container-fluid">
+            <p class="text-center"><small>CX Mercado Libre. <i class="far fa-copyright" aria-hidden="true"></i></small></p>
+        </div>
+    </footer>
+</body>
+
+</html>
+</div>
+</div>
