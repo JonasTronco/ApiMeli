@@ -8,16 +8,25 @@
 let mercadoEnvios = [
     {
         nombre : "Carrito paquetes en una misma etiqueta",
+        funcionamiento:"Solo debe colocar el User Id para lograr el resultado",
         descripcion: "Se puede ver si el user Seller decidió que va a querer enviar varios productos en un mismo paquete o no",
         url:"https://api.mercadolibre.com/users/XXXXXXX/shipping_preferences",
-        habilitado:true
+        habilitado:true,
+        token: false,
+        requiere:{
+            users: "Ingresa el usuario"
+        }
     },
     
     {
         nombre : "Codigo postal de MLM",
         descripcion: "Acá podremos saber si el código postal está activo ",
         url: "https://api.mercadolibre.com/countries/MX/zip_codes/XXXXXX",
-        habilitado:true
+        habilitado:true,
+        token: false,
+        requiere:{
+            zip_codes: "Ingresa el CP de Mexico"
+        }
     },
     {
         nombre : "Etiqueta ML",
@@ -178,9 +187,24 @@ let URL_COMPLETA
 
 /*----------Vue.js--------------*/
 let listMercadoEnvios = new Vue ({
-    el:'#listApp',
-    data: {mercadoEnvios}
+    el:'#listAppMe',
+    data: {
+
+        clickAyuda: false,
+        mercadoEnvios,
+        appSelect: '',
+        numeroApp: 0
+    },
+    methods:{
+        clickAyudaMetodo: function(){
+            let aux = this.clickAyuda
+            this.clickAyuda = !aux
+        }
+    }
+    
 })
+
+
 
 
 
