@@ -24,10 +24,12 @@
     <div id="listAppMe">
         <div class="container-fluid">
             <div class="row justify-content-md-center">
-                <div class="col-md-7" >
+                <div class="col-md-7">
+                    <br>
+                    <h6 class="text-center">Selecciona a continuación la herramienta de verificación que deseas utilizar</h6>
+                    <br>
                     <!--Listado de Selección de APIS con Vue.js-->
-                    <div class="form-group" >
-                        
+                    <div class="form-group">
                         <select class="form-control" name="apis" id="apis" v-model="appSelect">
                     <!--Ciclos para itererar sobre el Array Object-->
                             <template v-for="listApp in mercadoEnvios">                            
@@ -35,37 +37,35 @@
                             </template>
                         </select>
                     </div>
-                </div>            
+                </div>
             </div>
 
-        <!--Contenedor de selector de apis con vue-->
-            <div v-if="appSelect != '' ">
-                <p>{{appSelect}}</p>
-        <!--Ciclos para itererar sobre el Array Object-->
+            <!--Contenedor de selector de apis con vue-->
+            <div class="container_info" v-if="appSelect != '' ">
+                <h6 class=text-center>{{appSelect}}</h6>
+                <!--Ciclos para itererar sobre el Array Object-->
                 <template v-for="listRequiere in mercadoEnvios">
                     <template v-if="listRequiere.nombre == appSelect && listRequiere.requiere != null" >
-                        <input  v-for="value in listRequiere.requiere" type="text" class="form-control" name="categoryid" id="categoryid" v-bind:placeholder="value">
+                        <input  class="input-e" v-for="value in listRequiere.requiere" type="text" name="categoryid" id="categoryid" v-bind:placeholder="value">
                     </template>
                 </template>
-                <button  type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                <button type="button" id="exe" class="btn btn-success btn-sm">Ver Información</button></p>
                 <div class="descripcion">
                     <div class="descripcion-inn">
                         <a v-on:click="clickAyudaMetodo" href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                         <template v-for="listDetalle in mercadoEnvios">
                             <div v-if="clickAyuda && listDetalle.nombre == appSelect">
-                                <p><b>Funcionamiento:</b>{{listDetalle.funcionamiento}}</p>
-                                <p><b>Descripción:</b> {{listDetalle.descripcion}}</p>
+                                <p><b>Funcionamiento: </b>{{listDetalle.funcionamiento}}</p>
+                                <p><b>Descripción: </b>{{listDetalle.descripcion}}</p>
                             </div>
                         </template>
                     </div>
                 </div>
             </div>
-
-        <!--Ciclos para itererar sobre el Array Object FUTUROS RESULTADOS-->
+            <!--Ciclos para itererar sobre el Array Object FUTUROS RESULTADOS-->
+        </div>
     </div>
-
-    </div>
-             
+    <!-- Menú principal -->
     <div class="menu-container">
         <nav class="menu">
             <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
@@ -87,14 +87,14 @@
         </div>
     </footer>
 
-        <!--Vue-->
+    <!--Vue-->
     <script src="./JS/vue.js"></script>
-        <!--jQuery-->
+    <!--jQuery-->
     <script type="text/javascript" src="JS/jquery-3.3.1.min.js"></script>
-        <!-- Optional JavaScript -->
+    <!-- Optional JavaScript -->
     <script type="text/javascript" src="JS/visual_option.js"></script>
     <script type="text/javascript" src="JS/background.js"></script>
-        <!-- Popper.js & Bootstrap JS -->
+    <!-- Popper.js & Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>

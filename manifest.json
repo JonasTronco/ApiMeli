@@ -3,7 +3,7 @@
     "description": "Conjunto de herramientas con el fin de optimizar los tiempos de respuesta a nuestros usuarios",
     "version": "1.2",
     "background": {
-        "scripts": ["JS/jquery-3.3.1.min.js", "JS/background.js", "JS/visual_option.js", "JS/bootstrap.min.js"],
+        "scripts": ["JS/jquery-3.3.1.min.js", "JS/background.js", "JS/visual_option.js", "JS/bootstrap.min.js", "JS/vue.js"],
         "persistent": false
 
     },
@@ -21,5 +21,6 @@
         "default_icon": "128.png",
         "default_popup": "index.html"
     },
-    "manifest_version": 2
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
