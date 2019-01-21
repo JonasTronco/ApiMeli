@@ -14,7 +14,8 @@ let mercadoEnvios = [
         habilitado:true,
         token: false,
         requiere:{
-            users: "Ingresa el usuario"
+            users: "Ingresa el usuario",
+            ggg: "ho"
         }
     },
     
@@ -186,6 +187,14 @@ let SERIAL /*Test: 01099942713844*/
 let URL_COMPLETA
 
 /*----------Vue.js--------------*/
+
+Vue.component('ingresar',{
+    props:['value','requisitos'],
+    template: `
+        <input  type="text" class="form-control" name="categoryid" id="categoryid" v-bind:placeholder="value" v-model="requisitos">
+    
+    `
+})
 let listMercadoEnvios = new Vue ({
     el:'#listAppMe',
     data: {
@@ -193,13 +202,18 @@ let listMercadoEnvios = new Vue ({
         clickAyuda: false,
         mercadoEnvios,
         appSelect: '',
-        numeroApp: 0
+        requisitos: []  
+         
     },
     methods:{
         clickAyudaMetodo: function(){
             let aux = this.clickAyuda
             this.clickAyuda = !aux
+        },
+        consultar: function(){
+            console.log(this.input)
         }
+
     }
     
 })
@@ -208,23 +222,38 @@ let listMercadoEnvios = new Vue ({
 
 
 
-window.addEventListener('load', function() {
-    let IDE_BOTOM = document.getElementById("ejapi-30");
-    let IDE_BOTOM2 = document.getElementById("ejapi-30");
-    IDE_BOTOM.addEventListener('click', buscarPoint, false);
-});
 
-function buscarPoint() {
-    SERIAL = document.getElementById("serialpoint").value.trim()
-    URL_COMPLETA = `${URL_TITULARIDAD}${SERIAL}`
-    consulta(URL_COMPLETA, OPTS)
-        .then(function(data) {
-            addElement(data)
-        })
-        .catch(function() {
-            alert("Revisa el Serial")
-        })
+
+function urlConstructora (URL,x,y,z){
+
+    let auxURL = URL ;
+
+    if(x != null ) auxURL = auxURL.replace("XXX",x)
+        
+    if(y != null) auxURL = auxURL.replace("YYY",y)
+    
+    if(z != null) auxURL = auxURL.replace("ZZZ",z)
+            
+    return auxURL
 }
+
+
+
+
+
+
+
+// function buscarPoint() {
+//     SERIAL = document.getElementById("serialpoint").value.trim()
+//     URL_COMPLETA = `${URL_TITULARIDAD}${SERIAL}`
+//     consulta(URL_COMPLETA, OPTS)
+//         .then(function(data) {
+//             addElement(data)
+//         })
+//         .catch(function() {
+//             alert("Revisa el Serial")
+//         })
+// }
 
 
 
@@ -257,34 +286,34 @@ function consulta(URL_COMPLETA, OPTS) {
     return promese
 }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
+// function getCookie(cname) {
+//     var name = cname + "=";
+//     var decodedCookie = decodeURIComponent(document.cookie);
+//     var ca = decodedCookie.split(';');
+//     for (var i = 0; i < ca.length; i++) {
+//         var c = ca[i];
+//         while (c.charAt(0) == ' ') {
+//             c = c.substring(1);
+//         }
+//         if (c.indexOf(name) == 0) {
+//             return c.substring(name.length, c.length);
+//         }
+//     }
+//     return "";
+// }
 
 
-function buscarCobro() {
-    let user = document.getElementById("user_id").value.trim()
-    let cobro = document.getElementById("cobro_id").value.trim()
-    let token = document.getElementById("cobro_id").value.trim()
-    URL_COMPLETA = `https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=${cobro}&user_id=${user}&access_token=${token}'`
-    consulta(URL_COMPLETA, OPTS)
-        .then(function(data) {
-            addElement(data)
-        })
-        .catch(function() {
-            alert("Revisa el Serial")
-        })
-}
+// function buscarCobro() {
+//     let user = document.getElementById("user_id").value.trim()
+//     let cobro = document.getElementById("cobro_id").value.trim()
+//     let token = document.getElementById("cobro_id").value.trim()
+//     URL_COMPLETA = `https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=${cobro}&user_id=${user}&access_token=${token}'`
+//     consulta(URL_COMPLETA, OPTS)
+//         .then(function(data) {
+//             addElement(data)
+//         })
+//         .catch(function() {
+//             alert("Revisa el Serial")
+//         })
+// }
 
