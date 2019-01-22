@@ -3,7 +3,7 @@ $(document).ready(function() {
     //Llama el bloque del acordeón.
     $('.accordion-toggle').on('click', function(event) {
         event.preventDefault();
-        // Crea las variables del aordeón
+        // Crea las variables del acordeón
         var accordion = $(this);
         var accordionContent = accordion.next('.description-content');
 

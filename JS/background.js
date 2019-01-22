@@ -5,198 +5,161 @@
 /*********************/
 
 /***LISTADO DE APIS***/
-let mercadoEnvios = [
-    {
-        nombre : "Carrito paquetes en una misma etiqueta",
-        funcionamiento:"Solo debe colocar el User Id para lograr el resultado",
+let mercadoEnvios = [{
+        nombre: "PREFERENCIAS DE ENVÍO DE UN USUARIO",
+        funcionamiento: "Solo debe colocar el User Id para lograr el resultado",
         descripcion: "Se puede ver si el user Seller decidió que va a querer enviar varios productos en un mismo paquete o no",
-        url:"https://api.mercadolibre.com/users/XXXXXXX/shipping_preferences",
-        habilitado:true,
+        url: "https://api.mercadolibre.com/users/xxx/shipping_preferences",
+        habilitado: true,
         token: false,
         requiere:{
             users: "Ingresa el usuario",
             ggg: "ho"
         }
     },
-    
     {
-        nombre : "Codigo postal de MLM",
-        descripcion: "Acá podremos saber si el código postal está activo ",
-        url: "https://api.mercadolibre.com/countries/MX/zip_codes/XXXXXX",
-        habilitado:true,
+        nombre: "CATEGORÍA HABILITADA PARA ENVÍO POR ME",
+        funcionamiento: "Debes ingresar el User Id y el Id de la categoría",
+        descripcion: "Esta herramienta nos permite validar si un usuario está habilitado para enviar por Mercado Envíos por una categoría específica.",
+        url: " https://api.mercadolibre.com/users/xxx/shipping_modes?category_id=yyy",
+        habilitado: true,
         token: false,
-        requiere:{
-            zip_codes: "Ingresa el CP de Mexico"
+        requiere: {
+            users: "Ingresa el User ID",
+            category: "Ingresa el ID de la Categoría."
+        }
+    },
+
+
+    {
+        nombre: "GENERAR ETIQUETA ML",
+        descripcion: "Nos permite validar una etiqueta generada a un seller sin necesidad de darle Click en Imprimir etiqueta",
+        url: "https://api.mercadolibre.com/shipment_labels?shipment_ids=xxx&savePdf=Y&access_token=yyy",
+        habilitado: false,
+        token: true,
+        requiere: {
+            shipping: "Ingresa el ID del shipping"
+        }
+
+    },
+
+]
+let mercadoPago = [{
+        nombre: "BALANCE DE SALDO EN MERCADO PAGO",
+        descripcion: "Podemos verificar el dinero de la cuenta de cada usuario, ver cuánto tiene disponible, retenido y por qué, en reclamo, etc.",
+        url: "https://api.mercadolibre.com/users/xxx/mercadopago_account/balance?access_token=yyy",
+        /* Balance general de cuenta */
+        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx&status=unavailable&access_token=yyy",
+        /* Operaciones a liberar */
+        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx%20&label=unavailable_by_dispute&access_token=yyy",
+        /* Retenidas por Mediaciones */
+        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx%20&label=unavailable_by_chargeback&access_token=yyy",
+        /* Retenidas por Chargebacks */
+        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx%20&label=unavailable_by_shipping_return&access_token=yyy",
+        /* Retenidas por Devolución Express */
+        habilitado: true,
+        token: true,
+        requiere: {
+            user: "Ingresa el ID del Usuario"
+        }
+
+    },
+    {
+        nombre: "BLOQUEO POR VISA",
+        descripcion: "Nos servirá para ver si un usuario está bloqueado para recibir pagos con visa",
+        url: "https://api.mercadolibre.com/users/xxx/accepted_payment_methods/visa?marketplace=MELI",
+        habilitado: true,
+        token: false,
+        requiere: {
+            user: "Ingresa el ID del Usuario"
         }
     },
     {
-        nombre : "Etiqueta ML",
-        descripcion: "Nos permite validar una etiqueta generada a un seller sin necesidad de darle Click en Imprimir etiqueta",
-        url: "https://api.mercadolibre.com/shipment_labels?shipment_ids=XXX&savePdf=Y&access_token=XXXXXXXX",
-        habilitado:false
+        nombre: "INFORMACIÓN DE UN COBRO",
+        descripcion: "Esta herramienta proporciona toda la información asociada a un cobro, detalle, cliente, fecha y hora de liberación exacta, etc.",
+        url: "https://api.mercadopago.com/v1/payments/xxx?access_token=yyy",
+        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=xxx&user_id=zzz&access_token=yyy",
+        habilitado: true,
+        token: true,
+        requiere: {
+            payment: "Ingresa el ID del cobro",
+            user: "Ingresa el ID del Usuario"
+        }
     },
     {
-        nombre : "Formas de envios por Site",
-        descripcion: "Muestra los distintos shippings habilitados en el site",
-        url: "https://api.mercadolibre.com/sites/XXX/shipping_methods",
-        habilitado:false
-    },
-]
-
-let mercadoPago = [
-    
-    {
-        nombre : "Balance",
-        descripcion: "Podemos verificar el dinero de la cuenta de cada usuario, ver cuánto tiene disponible, retenido y por qué, en reclamo, etc.",
-        url:"https://api.mercadolibre.com/users/XXXXXX/mercadopago_account/balance?access_token=XXXXX",
-        habilitado:false
-    },
-    {
-        nombre : "Bancos Aceptados para Retiros",
-        descripcion: "Esta API nos ayudará a ver qué bancos son aceptados para retiros",
-        url: "https://api.mercadolibre.com/sites/MLM/withdrawals/accepted_banks",
-        habilitado:false
-    },
-    {
-        nombre : "Bloqueo por VISA",
-        descripcion: "Nos servirá para ver si un usuario está bloqueado para recibir pagos con visa",
-        url:"https://api.mercadolibre.com/users/XXXXXXXX/accepted_payment_methods/visa?marketplace=MELI",
-        habilitado:false
-    },
-    {
-        nombre : "Item en B=P",
+        nombre: "LIMITE MP POINT",
         descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
-        url:"https://api.mercadolibre.com/immediate_payment/validate?item_id=XXXXXXXXXXX ",
-        habilitado:false
+        url: "https://api.mercadolibre.com/point/services/caps/xxx ",
+        habilitado: true,
+        toke: false,
+        requiere: {
+            user: "Ingresa el ID del Usuario"
+        }
+    },
+    {
+        nombre: "TITULARIDAD DE POINT",
+        descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
+        url: "https://api.mercadolibre.com/point/services/poi/BBPOS-xxx ",
+        habilitado: true,
+        toke: false,
+        requiere: {
+            serial: "Ingresa el Serial del Point"
+        }
     }
-
 ]
-
 let mercadoShops = [{
-    nombre : ""
+    nombre: ""
 }]
-let mercadoVendedor = [
-    {
-        nombre : "Comercial",
-        descripcion: "Permite ver el nombre de la campaña en la cual está el producto",
-        url:"https://api.mercadolibre.com/deals/XXXXXX",
-        habilitado:false
+let mercadoVendedor = [{
+        nombre: "INFORMACIÓN DE CATEGORÍAS",
+        funcionamiento: "Ingresa el ID de la categoría, puedes obtenerlo desde CX debajo del título de la publicación de un usuario.",
+        descripcion: "Esta herramienta, nos indicará información correspondiente a una categoría específica.",
+        url: "https://api.mercadolibre.com/categories/xxx",
+        habilitado: true,
+        token: false,
+        requiere: {
+            users: "Ingresa el ID de la Categoría"
+        }
     },
     {
-        nombre : "Aplicaciones",
-        descripcion: "Permiter reconocer que aplicación realizó el cambio que vemos reflejado en zeus por el client id",
-        url: "https://api.mercadolibre.com/applications/XXXXXXXXX",
-        habilitado:false
-    },
-    
-    {
-        nombre : "Categorias",
-        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
-        url: "https://api.mercadolibre.com/categories/XXXXXXX",
-        habilitado:false
-    },
-
-    {
-        nombre : "Credit Level",
-        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
-        url: "https://api.mercadolibre.com/categories/XXXXXXX",
-        habilitado:false
+        nombre: "INFORMACIÓN DE CUENTA",
+        funcionamiento: "Ingresa el ID del usuario, para que funcione, debes hacerlo en modo incógnito desde la impersonalización del usuario, recuerda no tener más de una impersonalización activa.",
+        descripcion: "Esta herramienta, nos indicará toda la información asociada a la cuenta de un usuario de Mercado Libre",
+        url: "https://api.mercadolibre.com/users/xxx?access_token=yyy",
+        habilitado: true,
+        token: true,
+        requiere: {
+            users: "Ingresa el ID del Usuario"
+        }
     },
 
     {
-        nombre : "E-Shop",
-        descripcion: "En esta APi podremos ver cuando se activó un E-shop",
+        nombre: "INFORMACIÓN DE ÍTEMS",
+        funcionamiento: "",
+        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
+        url: "",
+        habilitado: false
+    },
+
+    {
+        nombre: "INFORMACIÓN DE ÓRDENES",
+        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
+        url: "https://api.mercadolibre.com/categories/XXXXXXX",
+        habilitado: false
+    },
+
+    {
+        nombre: "PRODUCT ADS",
+        descripcion: "Esta herramienta nos permitirá validar diferentes aspectos de la campaña de publicidad de un usuario, fecha de creación, visitas e inversión en la misma.",
         url: "https://api.mercadolibre.com/eshops/search?seller_id=XXXXXXXX",
-        habilitado:false
-    },
-    {
-        nombre : "Item",
-        descripcion: "Permite ver si un producto está en campaña comercial, ver el tamaño de las fotos que tiene cargadas, así como las dimensiones del producto",
-        url: "https://api.mercadolibre.com/items/XXXXXXXXXX",
-        habilitado:false
+        habilitado: false
     }
 ]
-/*--1---API-DE-APLICACIONES---------------------------------*/
-/*--2---API-DE-BALANCE--------------------------------------*/
-/*--3---API-DE-BANCOS ACEPTADOS PARA RETIROS----------------*/
-/*--4---API-DE-BLOQUEO POR VISA-----------------------------*/
-/*--5---API-DE-CAMPAÑA COMERCIAL----------------------------*/
-/*--6---API-DE-CARRITO PAQUETES EN UNA MISMA ETIQUETA-------*/
-/*--7---API-DE-CATEGORÍAS-----------------------------------*/
-/*--8---API-DE-CODIGO POSTAL DE MLM-------------------------*/
-/*--9---API-DE-COSTOS DE ENVÍO------------------------------*/
-/*--10--API-DE-CREDIT LEVEL---------------------------------*/
-/*--11--API-DE-CUANTAS OFERTAS TIENE UNA SUBASTA------------*/
-/*--12--API-DE-ESHOP----------------------------------------*/
-/*--13--API-DE-ETIQUETA ML----------------------------------*/
-/*--14--API-DE-FORMAS DE ENVÍO POR SITE---------------------*/
-/*--15--API-DE-ITEM EN B=P----------------------------------*/
-/*--16--API-DE-ÍTEMS----------------------------------------*/
-/*--17--API-DE-LIBERACIÓN DE DINERO-------------------------*/
-/*--18--API-DE-LIMITE MP POINT------------------------------*/
-/*--19--API-DE-MEDIACIONES----------------------------------*/
-/*--20--API-DE-MEDIOS DE PAGO ACEPTADOS POR SITE------------*/
-/*--21--API-DE-MÉTODOS ACEPTADOS DE PAGO--------------------*/
-/*--22--API-DE-MONTOS MÍNIMOS Y MÁXIMOS POR MEDIO DE PAGO---*/
-/*--23--API-DE-OPERACIONES A LIBERAR------------------------*/
-/*--24--API-DE-OPERACIONES RETENIDAS POR CHARGEBACKS--------*/
-/*--25--API-DE-OPERACIONES RETENIDAS POR DEVOLUCIÓN EXPRESS-*/
-/*--26--API-DE-OPINIONES------------------------------------*/
-/*--27--API-DE-ORDERS---------------------------------------*/
-/*--28--API-DE-PREGUNTAS REALIZADAS EN EL ÍTEM--------------*/
-/*--29--API-DE-PREGUNTAS SIN RESPONDER----------------------*/
-/*--30--API-DE-TITULARIDAD DE POINT-------------------------*/
-/*--31--API-DE-USUARIO CONFIABLE----------------------------*/
-/*--32--API-DE-VALIDACIÓN CÓDIGO UNIVERSAL DE PRODUCTO------*/
 
-
-/*CÓDIGO*/
-/*------API-DE-APLICACIONES---------------------------------*/
-
-/*------API-DE-BALANCE--------------------------------------*/
-/*------API-DE-BANCOS ACEPTADOS PARA RETIROS----------------*/
-/*------API-DE-BLOQUEO POR VISA-----------------------------*/
-/*------API-DE-CAMPAÑA COMERCIAL----------------------------*/
-/*------API-DE-CARRITO PAQUETES EN UNA MISMA ETIQUETA-------*/
-/*------API-DE-CATEGORÍAS-----------------------------------*/
-/*------API-DE-CODIGO POSTAL DE MLM-------------------------*/
-/*------API-DE-COSTOS DE ENVÍO------------------------------*/
-/*------API-DE-CREDIT LEVEL---------------------------------*/
-/*------API-DE-CUANTAS OFERTAS TIENE UNA SUBASTA------------*/
-/*------API-DE-ESHOP----------------------------------------*/
-/*------API-DE-ETIQUETA ML----------------------------------*/
-/*------API-DE-FORMAS DE ENVÍO POR SITE---------------------*/
-/*------API-DE-ITEM EN B=P----------------------------------*/
-/*------API-DE-ÍTEMS----------------------------------------*/
-/*------API-DE-LIBERACIÓN DE DINERO-------------------------*/
-/*------API-DE-LIMITE MP POINT------------------------------*/
-/*------API-DE-MEDIACIONES----------------------------------*/
-/*------API-DE-MEDIOS DE PAGO ACEPTADOS POR SITE------------*/
-/*------API-DE-MÉTODOS ACEPTADOS DE PAGO--------------------*/
-/*------API-DE-MONTOS MÍNIMOS Y MÁXIMOS POR MEDIO DE PAGO---*/
-/*------API-DE-OPERACIONES A LIBERAR------------------------*/
-/*------API-DE-OPERACIONES RETENIDAS POR CHARGEBACKS--------*/
-/*------API-DE-OPERACIONES RETENIDAS POR DEVOLUCIÓN EXPRESS-*/
-/*------API-DE-OPINIONES------------------------------------*/
-/*------API-DE-ORDERS---------------------------------------*/
-/*------API-DE-PREGUNTAS REALIZADAS EN EL ÍTEM--------------*/
-/*------API-DE-PREGUNTAS SIN RESPONDER----------------------*/
-/*------API-DE-TITULARIDAD DE POINT-------------------------*/
-const URL_TITULARIDAD = 'https://api.mercadolibre.com/point/services/poi/BBPOS-';
-let SERIAL /*Test: 01099942713844*/
-let URL_COMPLETA
 
 /*----------Vue.js--------------*/
-
-Vue.component('ingresar',{
-    props:['value','requisitos'],
-    template: `
-        <input  type="text" class="form-control" name="categoryid" id="categoryid" v-bind:placeholder="value" v-model="requisitos">
-    
-    `
-})
-let listMercadoEnvios = new Vue ({
-    el:'#listAppMe',
+let listMercadoEnvios = new Vue({
+    el: '#listAppMe',
     data: {
 
         clickAyuda: false,
@@ -205,8 +168,26 @@ let listMercadoEnvios = new Vue ({
         requisitos: []  
          
     },
-    methods:{
-        clickAyudaMetodo: function(){
+    methods: {
+        clickAyudaMetodo: function() {
+            let aux = this.clickAyuda
+            this.clickAyuda = !aux
+        }
+    }
+
+})
+
+let listMercadoVendedor = new Vue({
+    el: '#listAppMl',
+    data: {
+
+        clickAyuda: false,
+        mercadoVendedor,
+        appSelect: '',
+        numeroApp: 0
+    },
+    methods: {
+        clickAyudaMetodo: function() {
             let aux = this.clickAyuda
             this.clickAyuda = !aux
         },
@@ -215,9 +196,42 @@ let listMercadoEnvios = new Vue ({
         }
 
     }
-    
-})
 
+})
+let listMercadoPago = new Vue({
+    el: '#listAppMp',
+    data: {
+
+        clickAyuda: false,
+        mercadoVendedor,
+        appSelect: '',
+        numeroApp: 0
+    },
+    methods: {
+        clickAyudaMetodo: function() {
+            let aux = this.clickAyuda
+            this.clickAyuda = !aux
+        }
+    }
+
+})
+let listMercadoShops = new Vue({
+    el: '#listAppMs',
+    data: {
+
+        clickAyuda: false,
+        mercadoVendedor,
+        appSelect: '',
+        numeroApp: 0
+    },
+    methods: {
+        clickAyudaMetodo: function() {
+            let aux = this.clickAyuda
+            this.clickAyuda = !aux
+        }
+    }
+
+})
 
 
 
@@ -317,3 +331,33 @@ function consulta(URL_COMPLETA, OPTS) {
 //         })
 // }
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
+function buscarCobro() {
+    let user = document.getElementById("user_id").value.trim()
+    let cobro = document.getElementById("cobro_id").value.trim()
+    let token = document.getElementById("cobro_id").value.trim()
+    URL_COMPLETA = `https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=${cobro}&user_id=${user}&access_token=${token}'`
+    consulta(URL_COMPLETA, OPTS)
+        .then(function(data) {
+            addElement(data)
+        })
+        .catch(function() {
+            alert("Revisa el Serial")
+        })
+}

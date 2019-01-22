@@ -29,226 +29,50 @@
             <h6 class="text-center"><i class="fas fa-book"></i> Biblioteca de API'S| Mercado Pago</h6>
         </nav>
     </header>
-    <div class="container-fluid">
-        <div class="row justify-content-md-center">
-            <div class="col-md-7">
-                <!--Listado de Selección de APIS-->
-                <div class="form-group">
-                    <label for="Selecciona el API"></label>
-                    <!-- Todas las opciones que figuran comentadas son contempladas como
-                        actualizaciones posteriores al 25-01  -->
-                    <select class="form-control" name="apis" id="apis">
-                        <option value="0">APIS MERCADO PAGO</option>
-                        <option value="mpapi-">BALANCE DE SALDO</option>
-                        <option value="mpapi-">BLOQUEO POR VISA</option>
-                        <option value="mpapi-">LIBERACIÓN DE DINERO</option>
-                        <option value="mpapi-">LIMITE MP POINT</option>
-                        <option value="mpapi-">OPERACIONES A LIBERAR</option>
-                        <option value="mpapi-">OPERACIONES RETENIDAS POR CHARGEBACKS</option>
-                        <option value="mpapi-">OPERACIONES RETENIDAS POR DEVOLUCIÓN EXPRESS</option>
-                        <option value="mpapi-">TITULARIDAD DE POINT</option>
-                    </select>
-                </div>
-                <!--Contenedor de selector de apis-->
-                <div id="seleccapis">
-                    <!--2---API-DE-BALANCE--------------------------------------->
-                    <div id="api-2" class="seccapi">
-                        <div class="card text-left">
-                            <img class="card-img-top" src="holder.js/100px180/" alt="">
-                            <div class="card-body">
-                                <p class="card-title">Balance Saldo de Cuenta</p>
-                                <p class="card-text">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="balanceid" id="balanceid" placeholder="Ingresa el User Id">
-                                    </div>
-                                    <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                                <div class="descripcion">
-                                    <div class="descripcion-inn">
-                                        <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                        <div class="description-content">
-                                            <p><b>Funcionamiento:</b></p>
-                                            <p><b>Descripción:</b></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-                <!--4---API-DE-BLOQUEO POR VISA------------------------------>
-                <div id="api-4" class="seccapi">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="holder.js/100px180/" alt="">
-                        <div class="card-body">
-                            <p class="card-title">Usuario Bloqueado por Visa</p>
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="useridvisa" id="useridvisa" placeholder="Ingresa el User Id">
-                                </div>
-                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                            <div class="descripcion">
-                                <div class="descripcion-inn">
-                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="description-content">
-                                        <p><b>Funcionamiento:</b></p>
-                                        <p><b>Descripción:</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div id="listAppMp">
+        <div class="container-fluid">
+            <div class="row justify-content-md-center">
+                <div class="col-md-7">
                     <br>
-                </div>
-                <!--17--API-DE-LIBERACIÓN DE DINERO-------------------------->
-                <div id="api-17" class="seccapi">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="holder.js/100px180/" alt="">
-                        <div class="card-body">
-                            <p class="card-title">Liberación de un cobro</p>
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="useridrel" id="useridrel" placeholder="Ingresa el User Id">
-                                    <input type="text" class="form-control" name="paymentidrel" id="paymentidrel" placeholder="Ingresa el Payment Id">
-                                </div>
-                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                            <div class="descripcion">
-                                <div class="descripcion-inn">
-                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="description-content">
-                                        <p><b>Funcionamiento:</b></p>
-                                        <p><b>Descripción:</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h6 class="text-center">Selecciona a continuación la herramienta de verificación que deseas utilizar</h6>
                     <br>
-
-                </div>
-                <!--18--API-DE-LIMITE MP POINT------------------------------->
-                <div id="api-18" class="seccapi">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="holder.js/100px180/" alt="">
-                        <div class="card-body">
-                            <p class="card-title">Límite para Cobrar con MP Point</p>
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="limitpoint" id="limitpoint" placeholder="Ingresa el User Id">
-                                </div>
-                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                            <div class="descripcion">
-                                <div class="descripcion-inn">
-                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="description-content">
-                                        <p><b>Funcionamiento:</b></p>
-                                        <p><b>Descripción:</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-                <!--23--API-DE-OPERACIONES A LIBERAR------------------------->
-                <div id="api-23" class="seccapi">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="holder.js/100px180/" alt="">
-                        <div class="card-body">
-                            <p class="card-title">Operaciones a Liberar</p>
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="user_opid" id="user_opid" placeholder="Ingresa el User Id">
-                                </div>
-                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                            <div class="descripcion">
-                                <div class="descripcion-inn">
-                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="description-content">
-                                        <p><b>Funcionamiento:</b></p>
-                                        <p><b>Descripción:</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-                <!--24--API-DE-OPERACIONES RETENIDAS POR CHARGEBACKS--------->
-                <div id="api-24" class="seccapi">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="holder.js/100px180/" alt="">
-                        <div class="card-body">
-                            <p class="card-title">Operaciones Retenidas por Contracargos</p>
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="user_opid" id="user_opid" placeholder="Ingresa el User Id">
-                                </div>
-                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                            <div class="descripcion">
-                                <div class="descripcion-inn">
-                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="description-content">
-                                        <p><b>Funcionamiento:</b></p>
-                                        <p><b>Descripción:</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-                <!--25--API-DE-OPERACIONES RETENIDAS POR DEVOLUCIÓN EXPRESS-->
-                <div id="api-25" class="seccapi">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="holder.js/100px180/" alt="">
-                        <div class="card-body">
-                            <p class="card-title">Operaciones Retenidas por Devolución Express</p>
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="user_opid" id="user_opid" placeholder="Ingresa el User Id">
-                                </div>
-                                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                            <div class="descripcion">
-                                <div class="descripcion-inn">
-                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="description-content">
-                                        <p><b>Funcionamiento:</b></p>
-                                        <p><b>Descripción:</b></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-                <!--30--API-DE-TITULARIDAD DE POINT-------------------------->
-                <div id="api-30" class="seccapi">
-                    <div class="card text-left">
-                        <img class="card-img-top" src="holder.js/100px180/" alt="">
-                        <div class="card-body">
-                            <p class="card-title">Titularidad del Point</p>
-                            <p class="card-text">
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="serialpoint" id="serialpoint" placeholder="Ingresa Serial del Point">
-                                </div>
-                                <button type="button" id="ejapi-30" class="btn btn-success btn-sm" onclick="buscarPoint()">Ejecutar API</button></p>
-                            <h3 id="resultado-point">Resultado:</h3>
-                            <div class="descripcion">
-                                <div class="descripcion-inn">
-                                    <a href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                                    <div class="description-content">
-                                        <p><b>Funcionamiento:</b>Para ejecutar el API debes ingresar el <b>Client ID</b>, lo obtienes desde: ZEUS > Items</p>
-                                        <p><b>Descripción:</b>Esta API identifica si un cambio dentro de una publicación fue realizada por el user o por una aplicación externa, además de identificar desde dónde fue realizado el cambio.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!--Listado de Selección de APIS con Vue.js-->
+                    <div class="form-group">
+                        <select class="form-control" name="apis" id="apis" v-model="appSelect">
+                                    <!--Ciclos para itererar sobre el Array Object-->
+                                            <template v-for="listApp in mercadoVendedor">                            
+                                                <option  v-if="listApp.habilitado">{{listApp.nombre}}</option>
+                                            </template>
+                                        </select>
                     </div>
                 </div>
             </div>
+
+            <!--Contenedor de selector de apis con vue-->
+            <div class="container_info" v-if="appSelect != '' ">
+                <p>{{appSelect}}</p>
+                <!--Ciclos para itererar sobre el Array Object-->
+                <template v-for="listRequiere in mercadoVendedor">
+                                    <template v-if="listRequiere.nombre == appSelect && listRequiere.requiere != null" >
+                                        <input  v-for="value in listRequiere.requiere" type="text" class="form-control" name="categoryid" id="categoryid" v-bind:placeholder="value">
+                                    </template>
+                </template>
+                <br>
+                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                <div class="descripcion">
+                    <div class="descripcion-inn">
+                        <a v-on:click="clickAyudaMetodo" href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                        <template v-for="listDetalle in mercadoVendedor">
+                                            <div v-if="clickAyuda && listDetalle.nombre == appSelect">
+                                                <p><b>Funcionamiento: </b>{{listDetalle.funcionamiento}}</p>
+                                                <p><b>Descripción: </b>{{listDetalle.descripcion}}</p>
+                                            </div>
+                                        </template>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
     </div>
     <div class="menu-container">
         <nav class="menu">
@@ -273,5 +97,3 @@
 </body>
 
 </html>
-</div>
-</div>
