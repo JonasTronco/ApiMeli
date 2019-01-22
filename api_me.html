@@ -30,6 +30,7 @@
                         
                         <select class="form-control" name="apis" id="apis" v-model="appSelect">
                     <!--Ciclos para itererar sobre el Array Object-->
+                            <option disabled value="">Selecciona una API</option>
                             <template v-for="listApp in mercadoEnvios">                            
                                 <option  v-if="listApp.habilitado">{{listApp.nombre}}</option>
                             </template>
@@ -41,14 +42,18 @@
         <!--Contenedor de selector de apis con vue-->
             <div v-if="appSelect != '' ">
                 <p>{{appSelect}}</p>
-        <!--Ciclos para itererar sobre el Array Object-->
+        <!--Ciclos para itererar sobre el Array Object Requiere-->
                 <template v-for="listRequiere in mercadoEnvios">
                     <template v-if="listRequiere.nombre == appSelect && listRequiere.requiere != null" >
-                        <input  v-for="value in listRequiere.requiere" type="text" class="form-control" name="categoryid" id="categoryid" v-bind:placeholder="value">
+                        <template  v-for="(value,index) in listRequiere.requiere">
+                            <ingresar :value="value" :requisitos="requisitos"></ingresar>
+                        </template>
                     </template>
                 </template>
-                <button  type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                <button @click="consultar" type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
                 <div class="descripcion">
+
+                    
                     <div class="descripcion-inn">
                         <a v-on:click="clickAyudaMetodo" href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
                         <template v-for="listDetalle in mercadoEnvios">
@@ -65,6 +70,17 @@
     </div>
 
     </div>
+
+    <!-- <div id="demo">
+            <div v-for='n in 3'>
+              <input v-model="form.parent_id[n]">
+            </div>
+            <div v-for='n in 3'>
+              {{ form.parent_id[n] }}
+            </div>
+          </div> -->
+
+
              
     <div class="menu-container">
         <nav class="menu">
