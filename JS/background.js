@@ -9,25 +9,25 @@ let mercadoEnvios = [{
         nombre: "PREFERENCIAS DE ENVÍO DE UN USUARIO",
         funcionamiento: "Solo debe colocar el User Id para lograr el resultado",
         descripcion: "Se puede ver si el user Seller decidió que va a querer enviar varios productos en un mismo paquete o no",
-        url: "https://api.mercadolibre.com/users/xxx/shipping_preferences",
+        url: "https://api.mercadolibre.com/users/XXX/shipping_preferences",
         habilitado: true,
         token: false,
-        requiere:{
-            users: "Ingresa el usuario",
-            ggg: "ho"
-        }
+        requiere:[{
+            data: "Ingresa el usuario"            
+        }]
     },
     {
         nombre: "CATEGORÍA HABILITADA PARA ENVÍO POR ME",
         funcionamiento: "Debes ingresar el User Id y el Id de la categoría",
         descripcion: "Esta herramienta nos permite validar si un usuario está habilitado para enviar por Mercado Envíos por una categoría específica.",
-        url: " https://api.mercadolibre.com/users/xxx/shipping_modes?category_id=yyy",
+        url: " https://api.mercadolibre.com/users/XXX/shipping_modes?category_id=YYY",
         habilitado: true,
         token: false,
-        requiere: {
-            users: "Ingresa el User ID",
-            category: "Ingresa el ID de la Categoría."
-        }
+        requiere:[
+            {data: "Ingresa el usuario"},
+            {data: "Ingresa el ID de la Categoría"}
+        ]
+        
     },
 
 
@@ -158,6 +158,7 @@ let mercadoVendedor = [{
 
 
 /*----------Vue.js--------------*/
+let resultadosObjeto;
 let listMercadoEnvios = new Vue({
     el: '#listAppMe',
     data: {
@@ -165,73 +166,113 @@ let listMercadoEnvios = new Vue({
         clickAyuda: false,
         mercadoEnvios,
         appSelect: '',
-        requisitos: []  
+        requisitos: [],
+        resultado: {}
          
     },
     methods: {
         clickAyudaMetodo: function() {
             let aux = this.clickAyuda
             this.clickAyuda = !aux
-        }
-    }
-
-})
-
-let listMercadoVendedor = new Vue({
-    el: '#listAppMl',
-    data: {
-
-        clickAyuda: false,
-        mercadoVendedor,
-        appSelect: '',
-        numeroApp: 0
-    },
-    methods: {
-        clickAyudaMetodo: function() {
-            let aux = this.clickAyuda
-            this.clickAyuda = !aux
         },
-        consultar: function(){
-            console.log(this.input)
-        }
+        consultar: function(){   
+            for (let index = 0; index < this.mercadoEnvios.length; index++) {
+                
+                if (this.appSelect == this.mercadoEnvios[index].nombre ) {
+                    
+                    let urlTemporal = this.mercadoEnvios[index].url
+                    let x,y,z
+                            
+                    for (let index = 0; index < this.requisitos.length; index++) {
+                        if (this.requisitos[index] != null) {
+                            x = this.requisitos[index]
+                        }else{
+                            y = this.requisitos[index]
+                        }                       
+                    }
+                    
+                    if (this.mercadoEnvios.token) {
+                        z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
+                        if (z == null) {
+                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
+                        }
+                    }
+                    // console.log(urlConstructora(urlTemporal,x,y,z))
+                    consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
+                        .then(function(data){                            
+                            // let aux = data
+                            // this.resultado.data1 = aux
+                            // resultadosObjeto = data
+                        })
+                        .catch(function(){
+                            alert("Error en la consulta")
+                        })
+                }
+                
+            }
+        },
+        userid: function(){
 
+        }
     }
 
 })
-let listMercadoPago = new Vue({
-    el: '#listAppMp',
-    data: {
 
-        clickAyuda: false,
-        mercadoVendedor,
-        appSelect: '',
-        numeroApp: 0
-    },
-    methods: {
-        clickAyudaMetodo: function() {
-            let aux = this.clickAyuda
-            this.clickAyuda = !aux
-        }
-    }
+// let listMercadoVendedor = new Vue({
+//     el: '#listAppMl',
+//     data: {
 
-})
-let listMercadoShops = new Vue({
-    el: '#listAppMs',
-    data: {
+//         clickAyuda: false,
+//         mercadoVendedor,
+//         appSelect: '',
+//         numeroApp: 0
+//     },
+//     methods: {
+//         clickAyudaMetodo: function() {
+//             let aux = this.clickAyuda
+//             this.clickAyuda = !aux
+//         },
+//         consultar: function(){
+//             console.log(this.input)
+//         }
 
-        clickAyuda: false,
-        mercadoVendedor,
-        appSelect: '',
-        numeroApp: 0
-    },
-    methods: {
-        clickAyudaMetodo: function() {
-            let aux = this.clickAyuda
-            this.clickAyuda = !aux
-        }
-    }
+//     }
 
-})
+// })
+// let listMercadoPago = new Vue({
+//     el: '#listAppMp',
+//     data: {
+
+//         clickAyuda: false,
+//         mercadoVendedor,
+//         appSelect: '',
+//         numeroApp: 0
+//     },
+//     methods: {
+//         clickAyudaMetodo: function() {
+//             let aux = this.clickAyuda
+//             this.clickAyuda = !aux
+//         }
+//     }
+
+// })
+// let listMercadoShops = new Vue({
+//     el: '#listAppMs',
+//     data: {
+
+//         clickAyuda: false,
+//         mercadoVendedor,
+//         appSelect: '',
+//         numeroApp: 0
+//     },
+//     methods: {
+//         clickAyudaMetodo: function() {
+//             let aux = this.clickAyuda
+//             this.clickAyuda = !aux
+//         }
+//     }
+
+// })
 
 
 
