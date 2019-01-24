@@ -14,6 +14,10 @@ let mercadoEnvios = [{
         token: false,
         requiere:[{
             data: "Ingresa el usuario"            
+        }],
+        resultados: [{
+            data: "local_pick_up"
+
         }]
     },
     {
@@ -167,7 +171,8 @@ let listMercadoEnvios = new Vue({
         mercadoEnvios,
         appSelect: '',
         requisitos: [],
-        resultado: {}
+        resultado: {},
+        mostrar: false
          
     },
     methods: {
@@ -175,10 +180,19 @@ let listMercadoEnvios = new Vue({
             let aux = this.clickAyuda
             this.clickAyuda = !aux
         },
-        consultar: function(){   
+        consultar: function(){ 
+            let aux = new Array(2);
+            let aux2 = new Array(2);
+             
             for (let index = 0; index < this.mercadoEnvios.length; index++) {
                 
                 if (this.appSelect == this.mercadoEnvios[index].nombre ) {
+
+                    for (let j = 0; j < this.mercadoEnvios[index].resultados.length; j++) {
+                        aux2[j] = this.mercadoEnvios[index].resultados[j].data
+                        // console.log(aux2)    
+                        
+                    }
                     
                     let urlTemporal = this.mercadoEnvios[index].url
                     let x,y,z
@@ -198,18 +212,49 @@ let listMercadoEnvios = new Vue({
                         }
                     }
                     // console.log(urlConstructora(urlTemporal,x,y,z))
+                    
                     consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
-                        .then(function(data){                            
-                            // let aux = data
-                            // this.resultado.data1 = aux
-                            // resultadosObjeto = data
+                        .then(function(data){ 
+                            for (let i = 0; i < aux2.length; i++) {
+                                let aux3 = aux2[i]
+                                aux[i] = data[aux3]                                
+                            }                            
+                            console.log("este es el valor 1"+ aux)                                     
+                                                     
                         })
+                        
                         .catch(function(){
                             alert("Error en la consulta")
                         })
+                    
                 }
                 
             }
+            setTimeout(() => {
+                console.log("este es el valor 2 "+ aux[0])
+                console.log("llego") 
+
+                for (let index = 0; index < this.mercadoEnvios.length; index++) {
+                    if (this.appSelect == this.mercadoEnvios[index].nombre) {
+                        for (let j = 0; j < this.mercadoEnvios[index].resultados.length; j++) {
+                            let a = aux2[j]
+                            let b = aux[j]
+                            Vue.set(this.resultado, a,b )
+                        }
+
+                    }
+                    
+                }
+
+                console.log(this.resultado)
+                this.mostrar = true;    
+                                            
+            }, 1000);
+
+            
+           
+            
+            
         },
         userid: function(){
 
@@ -293,7 +338,10 @@ function urlConstructora (URL,x,y,z){
 }
 
 
-
+// function otracosnulta(URL){
+//   return  fetch(URL)
+//         .then(res => res.json())
+// }
 
 
 

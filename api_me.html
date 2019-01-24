@@ -62,11 +62,14 @@
                         </template>
                     </div>
                 </div>
-                <div v-show="!resultado">
-                    
+                    <!--Ciclos para itererar sobre el Array Object FUTUROS RESULTADOS-->
+                <div id="resultados" v-show="mostrar">
+                    <template v-for="(value, key) in resultado">
+                        {{ key }} : {{ value }}
+                    </template>
                 </div>
             </div>
-            <!--Ciclos para itererar sobre el Array Object FUTUROS RESULTADOS-->
+            
         </div>
     </div>
     <!-- Menú principal -->
