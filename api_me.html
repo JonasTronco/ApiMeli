@@ -25,14 +25,14 @@
         <div class="container-fluid">
             <div class="row justify-content-md-center">
                 <div class="col-md-7">
-                    <br>
-                    <h6 class="text-center">Selecciona a continuación la herramienta de verificación que deseas utilizar</h6>
-                    <br>
+                    <div class="principal-title">
+                        <h6 class="text-center">Selecciona a continuación la herramienta de verificación que deseas utilizar</h6>
+                    </div>
                     <!--Listado de Selección de APIS con Vue.js-->
                     <div class="form-group">
                         <select class="form-control" name="apis" id="apis" v-model="appSelect">
                     <!--Ciclos para itererar sobre el Array Object-->
-                            <option disabled value="">Selecciona una API</option>
+                            <option disabled value="">SELECCIONA UNA HERRAMIENTA DE VERIFICACIÓN</option>
                             <template v-for="listApp in mercadoEnvios">                            
                                 <option  v-if="listApp.habilitado">{{listApp.nombre}}</option>
                             </template>
@@ -40,7 +40,6 @@
                     </div>
                 </div>
             </div>
-
             <!--Contenedor de selector de apis con vue-->
             <div class="container_info" v-if="appSelect != '' ">
                 <h6 class=text-center>{{appSelect}}</h6>
@@ -66,6 +65,7 @@
                 <div id="resultados" v-show="mostrar">
                     <template v-for="(value, key) in resultado">
                         {{ key }} : {{ value }}
+                        <br>
                     </template>
                 </div>
             </div>

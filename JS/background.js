@@ -15,52 +15,40 @@ let mercadoEnvios = [{
         requiere:[{
             data: "Ingresa el usuario"            
         }],
-        resultados: [{
-            data: "local_pick_up"
-
-        }]
+        resultados: [
+            {data: "modes"},
+            {data: "local_pick_up"},
+        ]
     },
     {
         nombre: "CATEGORÍA HABILITADA PARA ENVÍO POR ME",
         funcionamiento: "Debes ingresar el User Id y el Id de la categoría",
         descripcion: "Esta herramienta nos permite validar si un usuario está habilitado para enviar por Mercado Envíos por una categoría específica.",
         url: " https://api.mercadolibre.com/users/XXX/shipping_modes?category_id=YYY",
-        habilitado: true,
+        habilitado: false,
         token: false,
         requiere:[
             {data: "Ingresa el usuario"},
-            {data: "Ingresa el ID de la Categoría"}
+            {data: "Ingresa el ID de la Categoría"},
+        ],
+        resultados: [
+            {data: "mode"}
         ]
-        
-    },
-
-
-    {
-        nombre: "GENERAR ETIQUETA ML",
-        descripcion: "Nos permite validar una etiqueta generada a un seller sin necesidad de darle Click en Imprimir etiqueta",
-        url: "https://api.mercadolibre.com/shipment_labels?shipment_ids=xxx&savePdf=Y&access_token=yyy",
-        habilitado: false,
-        token: true,
-        requiere: {
-            shipping: "Ingresa el ID del shipping"
-        }
-
-    },
-
+    }
 ]
-let mercadoPago = [{
+/* url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=XXX&status=unavailable&access_token=yyy",
+/* Operaciones a liberar */
+/* url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=XXX%20&label=unavailable_by_dispute&access_token=yyy",
+/* Retenidas por Mediaciones */
+/* url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=XXX%20&label=unavailable_by_chargeback&access_token=yyy",
+/* Retenidas por Chargebacks */
+/* url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=XXX%20&label=unavailable_by_shipping_return&access_token=yyy",
+/* Retenidas por Devolución Express */ 
+
+let mercadoPago = [/* {
         nombre: "BALANCE DE SALDO EN MERCADO PAGO",
         descripcion: "Podemos verificar el dinero de la cuenta de cada usuario, ver cuánto tiene disponible, retenido y por qué, en reclamo, etc.",
         url: "https://api.mercadolibre.com/users/xxx/mercadopago_account/balance?access_token=yyy",
-        /* Balance general de cuenta */
-        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx&status=unavailable&access_token=yyy",
-        /* Operaciones a liberar */
-        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx%20&label=unavailable_by_dispute&access_token=yyy",
-        /* Retenidas por Mediaciones */
-        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx%20&label=unavailable_by_chargeback&access_token=yyy",
-        /* Retenidas por Chargebacks */
-        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=xxx%20&label=unavailable_by_shipping_return&access_token=yyy",
-        /* Retenidas por Devolución Express */
         habilitado: true,
         token: true,
         requiere: {
@@ -71,33 +59,35 @@ let mercadoPago = [{
     {
         nombre: "BLOQUEO POR VISA",
         descripcion: "Nos servirá para ver si un usuario está bloqueado para recibir pagos con visa",
-        url: "https://api.mercadolibre.com/users/xxx/accepted_payment_methods/visa?marketplace=MELI",
+        url: "https://api.mercadolibre.com/users/XXX/accepted_payment_methods/visa?marketplace=MELI",
         habilitado: true,
         token: false,
-        requiere: {
-            user: "Ingresa el ID del Usuario"
-        }
-    },
+        requiere:[
+            {data: "Ingresa el ID del Usuario"}
+        ],
+    }, */
     {
         nombre: "INFORMACIÓN DE UN COBRO",
         descripcion: "Esta herramienta proporciona toda la información asociada a un cobro, detalle, cliente, fecha y hora de liberación exacta, etc.",
         url: "https://api.mercadopago.com/v1/payments/xxx?access_token=yyy",
-        url: "https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=xxx&user_id=zzz&access_token=yyy",
         habilitado: true,
         token: true,
-        requiere: {
-            payment: "Ingresa el ID del cobro",
-            user: "Ingresa el ID del Usuario"
-        }
+        requiere: [
+            {data: "Ingresa el ID del cobro"}
+        ],
+        resultados:[
+            {data: "money_release_date"},
+            {data: "operation_type"}
+        ]
     },
-    {
+   /*  {
         nombre: "LIMITE MP POINT",
         descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
         url: "https://api.mercadolibre.com/point/services/caps/xxx ",
         habilitado: true,
         toke: false,
         requiere: {
-            user: "Ingresa el ID del Usuario"
+            data: "Ingresa el ID del Usuario"
         }
     },
     {
@@ -107,9 +97,9 @@ let mercadoPago = [{
         habilitado: true,
         toke: false,
         requiere: {
-            serial: "Ingresa el Serial del Point"
+            data: "Ingresa el Serial del Point"
         }
-    }
+    } */
 ]
 let mercadoShops = [{
     nombre: ""
@@ -148,14 +138,14 @@ let mercadoVendedor = [{
     {
         nombre: "INFORMACIÓN DE ÓRDENES",
         descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
-        url: "https://api.mercadolibre.com/categories/XXXXXXX",
+        url: "https://api.mercadolibre.com/categories/XXX",
         habilitado: false
     },
 
     {
         nombre: "PRODUCT ADS",
         descripcion: "Esta herramienta nos permitirá validar diferentes aspectos de la campaña de publicidad de un usuario, fecha de creación, visitas e inversión en la misma.",
-        url: "https://api.mercadolibre.com/eshops/search?seller_id=XXXXXXXX",
+        url: "https://api.mercadolibre.com/eshops/search?seller_id=XXX",
         habilitado: false
     }
 ]
@@ -263,65 +253,208 @@ let listMercadoEnvios = new Vue({
 
 })
 
-// let listMercadoVendedor = new Vue({
-//     el: '#listAppMl',
-//     data: {
+ let listMercadoVendedor = new Vue({
+     el: '#listAppMl',
+     data: {
 
-//         clickAyuda: false,
-//         mercadoVendedor,
-//         appSelect: '',
-//         numeroApp: 0
-//     },
-//     methods: {
-//         clickAyudaMetodo: function() {
-//             let aux = this.clickAyuda
-//             this.clickAyuda = !aux
-//         },
-//         consultar: function(){
-//             console.log(this.input)
-//         }
+        clickAyuda: false,
+        mercadoVendedor,
+        appSelect: '',
+        requisitos: [],
+        resultado: {},
+        mostrar: false
+         
+    },
+    methods: {
+        clickAyudaMetodo: function() {
+            let aux = this.clickAyuda
+            this.clickAyuda = !aux
+        },
+        consultar: function(){ 
+            let aux = new Array(2);
+            let aux2 = new Array(2);
+             
+            for (let index = 0; index < this.mercadoVendedor.length; index++) {
+                
+                if (this.appSelect == this.mercadoVendedor[index].nombre ) {
 
-//     }
+                    for (let j = 0; j < this.mercadoVendedor[index].resultados.length; j++) {
+                        aux2[j] = this.mercadoVendedor[index].resultados[j].data
+                        // console.log(aux2)    
+                        
+                    }
+                    
+                    let urlTemporal = this.mercadoVendedor[index].url
+                    let x,y,z
+                            
+                    for (let index = 0; index < this.requisitos.length; index++) {
+                        if (this.requisitos[index] != null) {
+                            x = this.requisitos[index]
+                        }else{
+                            y = this.requisitos[index]
+                        }                       
+                    }
+                    
+                    if (this.mercadoVendedor.token) {
+                        z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
+                        if (z == null) {
+                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
+                        }
+                    }
+                    // console.log(urlConstructora(urlTemporal,x,y,z))
+                    
+                    consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
+                        .then(function(data){ 
+                            for (let i = 0; i < aux2.length; i++) {
+                                let aux3 = aux2[i]
+                                aux[i] = data[aux3]                                
+                            }                            
+                            console.log("este es el valor 1"+ aux)                                     
+                                                     
+                        })
+                        
+                        .catch(function(){
+                            alert("Error en la consulta")
+                        })
+                    
+                }
+                
+            }
+            setTimeout(() => {
+                console.log("este es el valor 2 "+ aux[0])
+                console.log("llego") 
 
-// })
-// let listMercadoPago = new Vue({
-//     el: '#listAppMp',
-//     data: {
+                for (let index = 0; index < this.mercadoVendedor.length; index++) {
+                    if (this.appSelect == this.mercadoVendedor[index].nombre) {
+                        for (let j = 0; j < this.mercadoVendedor[index].resultados.length; j++) {
+                            let a = aux2[j]
+                            let b = aux[j]
+                            Vue.set(this.resultado, a,b )
+                        }
 
-//         clickAyuda: false,
-//         mercadoVendedor,
-//         appSelect: '',
-//         numeroApp: 0
-//     },
-//     methods: {
-//         clickAyudaMetodo: function() {
-//             let aux = this.clickAyuda
-//             this.clickAyuda = !aux
-//         }
-//     }
+                    }
+                    
+                }
 
-// })
-// let listMercadoShops = new Vue({
-//     el: '#listAppMs',
-//     data: {
+                console.log(this.resultado)
+                this.mostrar = true;    
+                                            
+            }, 1000);
 
-//         clickAyuda: false,
-//         mercadoVendedor,
-//         appSelect: '',
-//         numeroApp: 0
-//     },
-//     methods: {
-//         clickAyudaMetodo: function() {
-//             let aux = this.clickAyuda
-//             this.clickAyuda = !aux
-//         }
-//     }
+            
+           
+            
+            
+        },
+        userid: function(){
 
-// })
+        }
+    }
 
+})
+         
+     
+ let listMercadoPago = new Vue({
+     el: '#listAppMp',
+     data: {
 
+        clickAyuda: false,
+        mercadoPago,
+        appSelect: '',
+        requisitos: [],
+        resultado: {},
+        mostrar: false
+         
+    },
+    methods: {
+        clickAyudaMetodo: function() {
+            let aux = this.clickAyuda
+            this.clickAyuda = !aux
+        },
+        consultar: function(){ 
+            let aux = new Array(2);
+            let aux2 = new Array(2);
+             
+            for (let index = 0; index < this.mercadoPago.length; index++) {
+                
+                if (this.appSelect == this.mercadoPago[index].nombre ) {
 
+                    for (let j = 0; j < this.mercadoPago[index].resultados.length; j++) {
+                        aux2[j] = this.mercadoPago[index].resultados[j].data
+                        // console.log(aux2)    
+                        
+                    }
+                    
+                    let urlTemporal = this.mercadoPago[index].url
+                    let x,y,z
+                            
+                    for (let index = 0; index < this.requisitos.length; index++) {
+                        if (this.requisitos[index] != null) {
+                            x = this.requisitos[index]
+                        }else{
+                            y = this.requisitos[index]
+                        }                       
+                    }
+                    
+                    if (this.mercadoPago.token) {
+                        z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
+                        if (z == null) {
+                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
+                        }
+                    }
+                    // console.log(urlConstructora(urlTemporal,x,y,z))
+                    
+                    consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
+                        .then(function(data){ 
+                            for (let i = 0; i < aux2.length; i++) {
+                                let aux3 = aux2[i]
+                                aux[i] = data[aux3]                                
+                            }                            
+                            console.log("este es el valor 1"+ aux)                                     
+                                                     
+                        })
+                        
+                        .catch(function(){
+                            alert("Error en la consulta")
+                        })
+                    
+                }
+                
+            }
+            setTimeout(() => {
+                console.log("este es el valor 2 "+ aux[0])
+                console.log("llego") 
 
+                for (let index = 0; index < this.mercadoPago.length; index++) {
+                    if (this.appSelect == this.mercadoPago[index].nombre) {
+                        for (let j = 0; j < this.mercadoPago[index].resultados.length; j++) {
+                            let a = aux2[j]
+                            let b = aux[j]
+                            Vue.set(this.resultado, a,b )
+                        }
+
+                    }
+                    
+                }
+
+                console.log(this.resultado)
+                this.mostrar = true;    
+                                            
+            }, 1000);
+
+            
+           
+            
+            
+        },
+        userid: function(){
+
+        }
+    }
+
+})
+ 
+ 
 
 
 function urlConstructora (URL,x,y,z){
@@ -337,45 +470,6 @@ function urlConstructora (URL,x,y,z){
     return auxURL
 }
 
-
-// function otracosnulta(URL){
-//   return  fetch(URL)
-//         .then(res => res.json())
-// }
-
-
-
-
-// function buscarPoint() {
-//     SERIAL = document.getElementById("serialpoint").value.trim()
-//     URL_COMPLETA = `${URL_TITULARIDAD}${SERIAL}`
-//     consulta(URL_COMPLETA, OPTS)
-//         .then(function(data) {
-//             addElement(data)
-//         })
-//         .catch(function() {
-//             alert("Revisa el Serial")
-//         })
-// }
-
-
-
-/*------API-DE-USUARIO CONFIABLE----------------------------*/
-
-
-/*------API-DE-VALIDACIÓN CÓDIGO UNIVERSAL DE PRODUCTO------*/
-
-
-/*----------API TITULARIDAD POINT----------*/
-
-
-
-/*----------API Liberación Cobros Mercado Pado----------*/
-
-/*    URL_COMPLETA = `https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=2959486596&user_id=189920495&access_token=XXXXXX'` */
-
-
-
 const OPTS = { crossDomain: true };
 let promese
 
@@ -387,66 +481,4 @@ function consulta(URL_COMPLETA, OPTS) {
     })
 
     return promese
-}
-
-// function getCookie(cname) {
-//     var name = cname + "=";
-//     var decodedCookie = decodeURIComponent(document.cookie);
-//     var ca = decodedCookie.split(';');
-//     for (var i = 0; i < ca.length; i++) {
-//         var c = ca[i];
-//         while (c.charAt(0) == ' ') {
-//             c = c.substring(1);
-//         }
-//         if (c.indexOf(name) == 0) {
-//             return c.substring(name.length, c.length);
-//         }
-//     }
-//     return "";
-// }
-
-
-// function buscarCobro() {
-//     let user = document.getElementById("user_id").value.trim()
-//     let cobro = document.getElementById("cobro_id").value.trim()
-//     let token = document.getElementById("cobro_id").value.trim()
-//     URL_COMPLETA = `https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=${cobro}&user_id=${user}&access_token=${token}'`
-//     consulta(URL_COMPLETA, OPTS)
-//         .then(function(data) {
-//             addElement(data)
-//         })
-//         .catch(function() {
-//             alert("Revisa el Serial")
-//         })
-// }
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-
-function buscarCobro() {
-    let user = document.getElementById("user_id").value.trim()
-    let cobro = document.getElementById("cobro_id").value.trim()
-    let token = document.getElementById("cobro_id").value.trim()
-    URL_COMPLETA = `https://api.mercadolibre.com/mercadopago_account/movements/search?reference_id=${cobro}&user_id=${user}&access_token=${token}'`
-    consulta(URL_COMPLETA, OPTS)
-        .then(function(data) {
-            addElement(data)
-        })
-        .catch(function() {
-            alert("Revisa el Serial")
-        })
 }
