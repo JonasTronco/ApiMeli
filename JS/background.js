@@ -398,7 +398,7 @@ let listMercadoEnvios = new Vue({
                     
                     if (this.mercadoEnvios[index].token) {
                         z = CookieMaster()
-                        if (z == undefined) {
+                        if (z == null) {
                             alert("Esta API usa una Cookie, Para usarla primero impers")                            
                         }
                     }

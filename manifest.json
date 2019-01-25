@@ -12,7 +12,7 @@
         "clipboard",
         "clipboardRead",
         "clipboardWrite",
-        "cookies"
+        "cookies", "tabs", "http://*/*", "https://*/*" 
 
 
     ],
