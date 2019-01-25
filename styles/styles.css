@@ -241,17 +241,17 @@ body-e {
     transition-duration: 180ms;
     -webkit-transition-duration: 180ms;
     /*  -webkit-transform: translate3d(0.5px, -104.99997px, 0); */
-    transform: translate3d(-120px, 0px, 0);
+    transform: translate3d(-100px, 0px, 0);
 }
 
 
-/*Mp*/
+/*ME*/
 
 .menu-open:checked~.menu-item:nth-child(4) {
     transition-duration: 280ms;
     -webkit-transition-duration: 280ms;
     /*   -webkit-transform: translate3d(90.9466px, -52.47586px, 0); */
-    transform: translate3d(120px, 0px, 0);
+    transform: translate3d(100px, 0px, 0);
 }
 
 
@@ -261,15 +261,9 @@ body-e {
     transition-duration: 380ms;
     -webkit-transition-duration: 380ms;
     /* -webkit-transform: translate3d(90.9466px, 52.47586px, 0); */
-    transform: translate3d(55px, -90px, 0);
+    transform: translate3d(0px, -90px, 0);
 }
 
 
 /*Mshops*/
 
-.menu-open:checked~.menu-item:nth-child(6) {
-    transition-duration: 480ms;
-    -webkit-transition-duration: 480ms;
-    /* -webkit-transform: translate3d(90.9466px, -52.47586px, 0); */
-    transform: translate3d(-55px, -90px, 0);
-}

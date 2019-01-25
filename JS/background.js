@@ -80,11 +80,11 @@ let mercadoPago = [/* {
             {data: "operation_type"}
         ]
     },
-   /*  {
+   {
         nombre: "LIMITE MP POINT",
         descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
         url: "https://api.mercadolibre.com/point/services/caps/xxx ",
-        habilitado: true,
+        habilitado: false,
         toke: false,
         requiere: {
             data: "Ingresa el ID del Usuario"
@@ -96,10 +96,13 @@ let mercadoPago = [/* {
         url: "https://api.mercadolibre.com/point/services/poi/BBPOS-xxx ",
         habilitado: true,
         toke: false,
-        requiere: {
+        requiere: [{
             data: "Ingresa el Serial del Point"
-        }
-    } */
+        }],
+        resultados:[
+            {data: ""}
+        ]
+    } 
 ]
 let mercadoShops = [{
     nombre: ""
@@ -108,23 +111,29 @@ let mercadoVendedor = [{
         nombre: "INFORMACIÓN DE CATEGORÍAS",
         funcionamiento: "Ingresa el ID de la categoría, puedes obtenerlo desde CX debajo del título de la publicación de un usuario.",
         descripcion: "Esta herramienta, nos indicará información correspondiente a una categoría específica.",
-        url: "https://api.mercadolibre.com/categories/xxx",
+        url: "https://api.mercadolibre.com/categories/XXX",
         habilitado: true,
         token: false,
-        requiere: {
-            users: "Ingresa el ID de la Categoría"
-        }
+        requiere:[
+             {data: "Ingresa el ID de la Categoría"}
+            ],
+        resultados:[
+            {data:""}
+        ]
     },
     {
         nombre: "INFORMACIÓN DE CUENTA",
         funcionamiento: "Ingresa el ID del usuario, para que funcione, debes hacerlo en modo incógnito desde la impersonalización del usuario, recuerda no tener más de una impersonalización activa.",
         descripcion: "Esta herramienta, nos indicará toda la información asociada a la cuenta de un usuario de Mercado Libre",
-        url: "https://api.mercadolibre.com/users/xxx?access_token=yyy",
+        url: "https://api.mercadolibre.com/users/XXX?access_token=YYY",
         habilitado: true,
         token: true,
-        requiere: {
-            users: "Ingresa el ID del Usuario"
-        }
+        requiere: [
+            {data: "Ingresa el ID del Usuario"}
+        ],
+        resultados:[
+            {data:""}
+        ]
     },
 
     {
@@ -298,7 +307,7 @@ let listMercadoEnvios = new Vue({
                     if (this.mercadoVendedor.token) {
                         z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
                         if (z == null) {
-                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
+                            alert("Esta API usa una Cookie, Para usarla primero debes impersonalizar")                            
                         }
                     }
                     // console.log(urlConstructora(urlTemporal,x,y,z))
