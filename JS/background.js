@@ -25,8 +25,8 @@ let mercadoEnvios = [{
         funcionamiento: "Debes ingresar el User Id y el Id de la categoría",
         descripcion: "Esta herramienta nos permite validar si un usuario está habilitado para enviar por Mercado Envíos por una categoría específica.",
         url: " https://api.mercadolibre.com/users/XXX/shipping_modes?category_id=YYY",
-        habilitado: false,
-        token: false,
+        habilitado: true,
+        token: true,
         requiere:[
             {data: "Ingresa el usuario"},
             {data: "Ingresa el ID de la Categoría"},
@@ -45,7 +45,7 @@ let mercadoEnvios = [{
 /* url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=XXX%20&label=unavailable_by_shipping_return&access_token=yyy",
 /* Retenidas por Devolución Express */ 
 
-let mercadoPago = [/* {
+let mercadoPago = [ {
         nombre: "BALANCE DE SALDO EN MERCADO PAGO",
         descripcion: "Podemos verificar el dinero de la cuenta de cada usuario, ver cuánto tiene disponible, retenido y por qué, en reclamo, etc.",
         url: "https://api.mercadolibre.com/users/xxx/mercadopago_account/balance?access_token=yyy",
@@ -65,7 +65,7 @@ let mercadoPago = [/* {
         requiere:[
             {data: "Ingresa el ID del Usuario"}
         ],
-    }, */
+    }, 
     {
         nombre: "INFORMACIÓN DE UN COBRO",
         descripcion: "Esta herramienta proporciona toda la información asociada a un cobro, detalle, cliente, fecha y hora de liberación exacta, etc.",
@@ -196,21 +196,21 @@ let listMercadoEnvios = new Vue({
                     let urlTemporal = this.mercadoEnvios[index].url
                     let x,y,z
                             
-                    for (let index = 0; index < this.requisitos.length; index++) {
-                        if (this.requisitos[index] != null) {
-                            x = this.requisitos[index]
+                    for (let p = 0; p < this.requisitos.length; p++) {
+                        if (p == 0) {
+                            x = this.requisitos[p]
                         }else{
-                            y = this.requisitos[index]
+                            y = this.requisitos[p]
                         }                       
                     }
                     
-                    if (this.mercadoEnvios.token) {
-                        z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
-                        if (z == null) {
+                    if (this.mercadoEnvios[index].token) {
+                        z = CookieMaster()
+                        if (z == undefined) {
                             alert("Esta API usa una Cookie, Para usarla primero impers")                            
                         }
                     }
-                    // console.log(urlConstructora(urlTemporal,x,y,z))
+                     console.log(urlConstructora(urlTemporal,x,y,z))
                     
                     consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
                         .then(function(data){ 
@@ -296,18 +296,25 @@ let listMercadoEnvios = new Vue({
                     let urlTemporal = this.mercadoVendedor[index].url
                     let x,y,z
                             
-                    for (let index = 0; index < this.requisitos.length; index++) {
-                        if (this.requisitos[index] != null) {
-                            x = this.requisitos[index]
+                    for (let p = 0; p < this.requisitos.length; p++) {
+                        if (p == 0) {
+                            x = this.requisitos[p]
                         }else{
-                            y = this.requisitos[index]
+                            y = this.requisitos[p]
                         }                       
                     }
                     
+<<<<<<< HEAD
                     if (this.mercadoVendedor.token) {
                         z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
                         if (z == null) {
                             alert("Esta API usa una Cookie, Para usarla primero debes impersonalizar")                            
+=======
+                    if (this.mercadoEnvios[index].token) {
+                        z = CookieMaster()
+                        if (z == undefined) {
+                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
+>>>>>>> 0e76ee50f2bfe457da175e3f2ff6fd3483c4dd04
                         }
                     }
                     // console.log(urlConstructora(urlTemporal,x,y,z))
@@ -397,16 +404,16 @@ let listMercadoEnvios = new Vue({
                     let urlTemporal = this.mercadoPago[index].url
                     let x,y,z
                             
-                    for (let index = 0; index < this.requisitos.length; index++) {
-                        if (this.requisitos[index] != null) {
-                            x = this.requisitos[index]
+                    for (let p = 0; p < this.requisitos.length; p++) {
+                        if (p == 0) {
+                            x = this.requisitos[p]
                         }else{
-                            y = this.requisitos[index]
+                            y = this.requisitos[p]
                         }                       
                     }
                     
-                    if (this.mercadoPago.token) {
-                        z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
+                    if (this.mercadoEnvios[index].token) {
+                        z = CookieMaster()
                         if (z == null) {
                             alert("Esta API usa una Cookie, Para usarla primero impers")                            
                         }
@@ -477,6 +484,10 @@ function urlConstructora (URL,x,y,z){
     if(z != null) auxURL = auxURL.replace("ZZZ",z)
             
     return auxURL
+}
+
+function CookieMaster(){
+    return chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
 }
 
 const OPTS = { crossDomain: true };
