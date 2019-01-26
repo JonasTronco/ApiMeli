@@ -11,16 +11,10 @@
         "notifications",
         "storage",
         "activeTab",
-<<<<<<< HEAD
         "http://*/*", "https://*/*",
         "cookies",
-        "https://.mercadolibre.com"
-=======
-        "clipboard",
-        "clipboardRead",
-        "clipboardWrite",
-        "cookies", "tabs", "http://*/*", "https://*/*" 
->>>>>>> 0e76ee50f2bfe457da175e3f2ff6fd3483c4dd04
+        "https://.mercadolibre.com",
+         "tabs"
 
 
     ],

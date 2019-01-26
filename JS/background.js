@@ -26,7 +26,7 @@ let mercadoEnvios = [{
         descripcion: "Esta herramienta nos permite validar si un usuario está habilitado para enviar por Mercado Envíos por una categoría específica.",
         url: " https://api.mercadolibre.com/users/XXX/shipping_modes?category_id=YYY",
         habilitado: true,
-        token: true,
+        token: false,
         requiere:[
             {data: "Ingresa el usuario"},
             {data: "Ingresa el ID de la Categoría"},
@@ -60,7 +60,7 @@ let mercadoPago = [ {
         nombre: "BLOQUEO POR VISA",
         descripcion: "Nos servirá para ver si un usuario está bloqueado para recibir pagos con visa",
         url: "https://api.mercadolibre.com/users/XXX/accepted_payment_methods/visa?marketplace=MELI",
-        habilitado: true,
+        habilitado: false,
         token: false,
         requiere:[
             {data: "Ingresa el ID del Usuario"}
@@ -93,14 +93,14 @@ let mercadoPago = [ {
     {
         nombre: "TITULARIDAD DE POINT",
         descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
-        url: "https://api.mercadolibre.com/point/services/poi/BBPOS-xxx ",
+        url: "https://api.mercadolibre.com/point/services/poi/BBPOS-XXX ",
         habilitado: true,
         toke: false,
         requiere: [{
             data: "Ingresa el Serial del Point"
         }],
         resultados:[
-            {data: ""}
+            {data: "user_id"}
         ]
     } 
 ]
@@ -304,17 +304,10 @@ let listMercadoEnvios = new Vue({
                         }                       
                     }
                     
-<<<<<<< HEAD
-                    if (this.mercadoVendedor.token) {
-                        z = chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
-                        if (z == null) {
-                            alert("Esta API usa una Cookie, Para usarla primero debes impersonalizar")                            
-=======
                     if (this.mercadoEnvios[index].token) {
                         z = CookieMaster()
                         if (z == undefined) {
                             alert("Esta API usa una Cookie, Para usarla primero impers")                            
->>>>>>> 0e76ee50f2bfe457da175e3f2ff6fd3483c4dd04
                         }
                     }
                     // console.log(urlConstructora(urlTemporal,x,y,z))
@@ -412,7 +405,7 @@ let listMercadoEnvios = new Vue({
                         }                       
                     }
                     
-                    if (this.mercadoEnvios[index].token) {
+                    if (this.mercadoPago[index].token) {
                         z = CookieMaster()
                         if (z == null) {
                             alert("Esta API usa una Cookie, Para usarla primero impers")                            
