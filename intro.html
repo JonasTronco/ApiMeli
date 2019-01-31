@@ -24,51 +24,15 @@
     </header>
     <div id="listAppMl">
         <div class="container-fluid">
-            <div class="row justify-content-md-center">
-                <div class="col-md-7">
-                    <br>
-                    <h6 class="text-center">Selecciona a continuación la herramienta de verificación que deseas utilizar</h6>
-                    <br>
-                    <!--Listado de Selección de APIS con Vue.js-->
-                    <div class="form-group">
-                        <select class="form-control" name="apis" id="apis" v-model="appSelect">
-                                <!--Ciclos para itererar sobre el Array Object-->
-                                        <template v-for="listApp in mercadoVendedor">                            
-                                            <option  v-if="listApp.habilitado">{{listApp.nombre}}</option>
-                                        </template>
-                                    </select>
-                    </div>
-                </div>
-            </div>
-
-            <!--Contenedor de selector de apis con vue-->
-            <div class="container_info" v-if="appSelect != '' ">
-                <p>{{appSelect}}</p>
-                <!--Ciclos para itererar sobre el Array Object-->
-                <template v-for="listRequiere in mercadoVendedor">
-                    <template v-if="listRequiere.nombre == appSelect && listRequiere.requiere != null" >
-                        <input  class="input-e" v-for="(value,index) in listRequiere.requiere" type="text" name="categoryid" id="categoryid" v-bind:placeholder="value.data" v-model="requisitos[index]" >
-                    </template>
-                </template>
-                <br>
-                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
-                <div class="descripcion">
-                    <div class="descripcion-inn">
-                        <a v-on:click="clickAyudaMetodo" href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
-                        <template v-for="listDetalle in mercadoVendedor">
-                                        <div v-if="clickAyuda && listDetalle.nombre == appSelect">
-                                            <p><b>Funcionamiento: </b>{{listDetalle.funcionamiento}}</p>
-                                            <p><b>Descripción: </b>{{listDetalle.descripcion}}</p>
-                                        </div>
-                                    </template>
-                    </div>
-                </div>
-            </div>
+           <p>Hola! Te damos la bienvenida a una nueva herramienta para resolver consultas de una forma más rápida, amigable y sencilla.</p>
+           <p>Encontrarás nuestros procesos separados en el menú inferior para facilitar la búsqueda de la información que deseas conocer, como lo son titularidad de un point, liberación de un cobro, etc</p>
+           <p>En cada herramienta, verás un botón con el signo <i class="fa fa-question-circle" aria-hidden="true"></i> el cual al dar click, te mostrará qué significa la información que ves en pantalla. </p>
+           <p>Te invitamos a dar tu feedback desde el botón <i class="fas fa-comment"></i> de esta forma apoyarás el desarrollo de la aplicación para futuras mejoras</p>
 
         </div>
     </div>
     <!-- Menú principal -->
-    <div class="menu-container">
+    <div class="row justify-content-md-center">
         <nav class="menu">
             <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
             <label class="menu-open-button" for="menu-open">
