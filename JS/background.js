@@ -49,7 +49,7 @@ let mercadoPago = [ {
         nombre: "BALANCE DE SALDO EN MERCADO PAGO",
         descripcion: "Podemos verificar el dinero de la cuenta de cada usuario, ver cuánto tiene disponible, retenido y por qué, en reclamo, etc.",
         url: "https://api.mercadolibre.com/users/xxx/mercadopago_account/balance?access_token=yyy",
-        habilitado: true,
+        habilitado: false,
         token: true,
         requiere: {
             user: "Ingresa el ID del Usuario"
@@ -60,7 +60,7 @@ let mercadoPago = [ {
         nombre: "BLOQUEO POR VISA",
         descripcion: "Nos servirá para ver si un usuario está bloqueado para recibir pagos con visa",
         url: "https://api.mercadolibre.com/users/XXX/accepted_payment_methods/visa?marketplace=MELI",
-        habilitado: false,
+        habilitado: true,
         token: false,
         requiere:[
             {data: "Ingresa el ID del Usuario"}
@@ -84,11 +84,11 @@ let mercadoPago = [ {
         nombre: "LIMITE MP POINT",
         descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
         url: "https://api.mercadolibre.com/point/services/caps/xxx ",
-        habilitado: false,
+        habilitado: true,
         toke: false,
-        requiere: {
+        requiere: [{
             data: "Ingresa el ID del Usuario"
-        }
+        }]
     },
     {
         nombre: "TITULARIDAD DE POINT",
@@ -104,9 +104,7 @@ let mercadoPago = [ {
         ]
     } 
 ]
-let mercadoShops = [{
-    nombre: ""
-}]
+
 let mercadoVendedor = [{
         nombre: "INFORMACIÓN DE CATEGORÍAS",
         funcionamiento: "Ingresa el ID de la categoría, puedes obtenerlo desde CX debajo del título de la publicación de un usuario.",
