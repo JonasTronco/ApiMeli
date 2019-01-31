@@ -48,29 +48,32 @@ let mercadoEnvios = [{
 let mercadoPago = [ {
         nombre: "BALANCE DE SALDO EN MERCADO PAGO",
         descripcion: "Podemos verificar el dinero de la cuenta de cada usuario, ver cuánto tiene disponible, retenido y por qué, en reclamo, etc.",
-        url: "https://api.mercadolibre.com/users/xxx/mercadopago_account/balance?access_token=yyy",
-        habilitado: true,
+        url: "https://api.mercadolibre.com/users/XXX/mercadopago_account/balance?access_token=ZZZ",
+        habilitado: false,
         token: true,
-        requiere: {
-            user: "Ingresa el ID del Usuario"
-        }
+        requiere: [{
+            data: "Ingresa el ID del Usuario"
+        }]
 
     },
     {
         nombre: "BLOQUEO POR VISA",
         descripcion: "Nos servirá para ver si un usuario está bloqueado para recibir pagos con visa",
         url: "https://api.mercadolibre.com/users/XXX/accepted_payment_methods/visa?marketplace=MELI",
-        habilitado: false,
+        habilitado: true,
         token: false,
         requiere:[
             {data: "Ingresa el ID del Usuario"}
         ],
+        resultados:[
+            {data: ""}
+        ]
     }, 
     {
         nombre: "INFORMACIÓN DE UN COBRO",
         descripcion: "Esta herramienta proporciona toda la información asociada a un cobro, detalle, cliente, fecha y hora de liberación exacta, etc.",
-        url: "https://api.mercadopago.com/v1/payments/xxx?access_token=yyy",
-        habilitado: true,
+        url: "https://api.mercadopago.com/v1/payments/XXX?access_token=ZZZ",
+        habilitado: false,
         token: true,
         requiere: [
             {data: "Ingresa el ID del cobro"}
@@ -83,7 +86,7 @@ let mercadoPago = [ {
    {
         nombre: "LIMITE MP POINT",
         descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
-        url: "https://api.mercadolibre.com/point/services/caps/xxx ",
+        url: "https://api.mercadolibre.com/point/services/caps/XXX ",
         habilitado: false,
         toke: false,
         requiere: {
@@ -104,61 +107,60 @@ let mercadoPago = [ {
         ]
     } 
 ]
+let mercadoVendedor = [{
+    nombre: "INFORMACIÓN DE CATEGORÍAS",
+    funcionamiento: "Ingresa el ID de la categoría, puedes obtenerlo desde CX debajo del título de la publicación de un usuario.",
+    descripcion: "Esta herramienta, nos indicará información correspondiente a una categoría específica.",
+    url: "https://api.mercadolibre.com/categories/XXX",
+    habilitado: true,
+    token: false,
+    requiere: [{
+        data:"Ingresa el ID de la Categoría"
+    }],
+    resultados:[
+        {data:""}
+    ]
+},
+{
+    nombre: "INFORMACIÓN DE CUENTA",
+    funcionamiento: "Ingresa el ID del usuario, para que funcione, debes hacerlo en modo incógnito desde la impersonalización del usuario, recuerda no tener más de una impersonalización activa.",
+    descripcion: "Esta herramienta, nos indicará toda la información asociada a la cuenta de un usuario de Mercado Libre",
+    url: "https://api.mercadolibre.com/users/XXX?access_token=ZZZ",
+    habilitado: true,
+    token: true,
+    requiere: [
+        {data: "Ingresa el ID del Usuario"}
+    ],
+    resultados:[
+        {data:""}
+    ]
+},
+
+{
+    nombre: "INFORMACIÓN DE ÍTEMS",
+    funcionamiento: "",
+    descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
+    url: "",
+    habilitado: true
+},
+
+{
+    nombre: "INFORMACIÓN DE ÓRDENES",
+    descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
+    url: "https://api.mercadolibre.com/categories/XXX",
+    habilitado: true
+},
+
+{
+    nombre: "PRODUCT ADS",
+    descripcion: "Esta herramienta nos permitirá validar diferentes aspectos de la campaña de publicidad de un usuario, fecha de creación, visitas e inversión en la misma.",
+    url: "https://api.mercadolibre.com/eshops/search?seller_id=XXX",
+    habilitado: false
+}
+]
 let mercadoShops = [{
     nombre: ""
 }]
-let mercadoVendedor = [{
-        nombre: "INFORMACIÓN DE CATEGORÍAS",
-        funcionamiento: "Ingresa el ID de la categoría, puedes obtenerlo desde CX debajo del título de la publicación de un usuario.",
-        descripcion: "Esta herramienta, nos indicará información correspondiente a una categoría específica.",
-        url: "https://api.mercadolibre.com/categories/XXX",
-        habilitado: true,
-        token: false,
-        requiere:[
-             {data: "Ingresa el ID de la Categoría"}
-            ],
-        resultados:[
-            {data:""}
-        ]
-    },
-    {
-        nombre: "INFORMACIÓN DE CUENTA",
-        funcionamiento: "Ingresa el ID del usuario, para que funcione, debes hacerlo en modo incógnito desde la impersonalización del usuario, recuerda no tener más de una impersonalización activa.",
-        descripcion: "Esta herramienta, nos indicará toda la información asociada a la cuenta de un usuario de Mercado Libre",
-        url: "https://api.mercadolibre.com/users/XXX?access_token=YYY",
-        habilitado: true,
-        token: true,
-        requiere: [
-            {data: "Ingresa el ID del Usuario"}
-        ],
-        resultados:[
-            {data:""}
-        ]
-    },
-
-    {
-        nombre: "INFORMACIÓN DE ÍTEMS",
-        funcionamiento: "",
-        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
-        url: "",
-        habilitado: false
-    },
-
-    {
-        nombre: "INFORMACIÓN DE ÓRDENES",
-        descripcion: "nos mostrará información sobre la composición de la categoría y de las categorías hijas",
-        url: "https://api.mercadolibre.com/categories/XXX",
-        habilitado: false
-    },
-
-    {
-        nombre: "PRODUCT ADS",
-        descripcion: "Esta herramienta nos permitirá validar diferentes aspectos de la campaña de publicidad de un usuario, fecha de creación, visitas e inversión en la misma.",
-        url: "https://api.mercadolibre.com/eshops/search?seller_id=XXX",
-        habilitado: false
-    }
-]
-
 
 /*----------Vue.js--------------*/
 let resultadosObjeto;
@@ -304,10 +306,10 @@ let listMercadoEnvios = new Vue({
                         }                       
                     }
                     
-                    if (this.mercadoEnvios[index].token) {
+                    if (this.mercadoVendedor[index].token) {
                         z = CookieMaster()
                         if (z == undefined) {
-                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
+                            alert("Esta API usa una Cookie, Para usarla primero impersonaliza")                            
                         }
                     }
                     // console.log(urlConstructora(urlTemporal,x,y,z))
