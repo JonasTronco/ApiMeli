@@ -51,6 +51,8 @@
                     </template>
                 </template>
                 <button @click="consultar"type="button" id="exe" class="btn btn-success btn-sm">Ver Información</button></p>
+                <button @click="cookie">Cookie Master</button>
+                
                 <div class="descripcion">                    
                     <div class="descripcion-inn">
                         <a v-on:click="clickAyudaMetodo" href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -65,7 +67,9 @@
                     <!--Ciclos para itererar sobre el Array Object FUTUROS RESULTADOS-->
                 <div id="resultados" v-show="mostrar">
                     <template v-for="(value, key) in resultado">
+
                         {{ key }} : {{ value }}
+                        <template v-if="value == null"> {{ key }} : {{ null }}</template>
                         <br>
                     </template>
                 </div>
@@ -88,7 +92,7 @@
     
             </nav>
         </div>
-</div>
+    </div>
    
     <footer class="footer-me">
         <div class="container-fluid">
@@ -104,8 +108,8 @@
     <script type="text/javascript" src="JS/visual_option.js"></script>
     <script type="text/javascript" src="JS/background.js"></script>
     <!-- Popper.js & Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="./JS/popper.min.js"></script>
+    <script src="./JS/bootstrap.min.js"></script>
 </body>
 
 </html>

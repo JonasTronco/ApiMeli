@@ -1,8 +1,7 @@
-/*********************/
-/*                   */
-/*ÍNDICE DE SCRIPTING*/
-/*                   */
-/*********************/
+// Datos de Ts: User Id: 272179396 MLC, 189935525 MPE, 215060007 MLA
+// Datos de Ts: Items: MLA645092763
+// Categoria TS: MLM10888
+// Deal MCO153
 
 /***LISTADO DE APIS***/
 let mercadoEnvios = [{
@@ -34,7 +33,24 @@ let mercadoEnvios = [{
         resultados: [
             {data: "mode"}
         ]
+    },
+
+    {
+        nombre: "USUARIO CONFIABLE POR ME",
+        funcionamiento: "Debes ingresar el User Id",
+        descripcion: "Podremos ver si un usuario es confiable para poder enviar artículos frágiles a través de Mercado Envíos.",
+        url: "https://api.mercadolibre.com/users/XXX/shipping_preferences",
+        habilitado: true,
+        token: false,
+        requiere:[
+            {data: "Ingresa el usuario"}            
+        ],
+        resultados: [
+            {data: "trusted_user"}
+        ]
     }
+
+
 ]
 /* url: "https://api.mercadolibre.com/mercadopago_account/movements/search?user_id=XXX&status=unavailable&access_token=yyy",
 /* Operaciones a liberar */
@@ -53,7 +69,10 @@ let mercadoPago = [ {
         token: true,
         requiere: [{
             data: "Ingresa el ID del Usuario"
-        }]
+        }],
+        resultados: [
+            {data: "mode"}
+        ]
 
     },
     {
@@ -66,7 +85,7 @@ let mercadoPago = [ {
             {data: "Ingresa el ID del Usuario"}
         ],
         resultados:[
-            {data: ""}
+            {data: "deferred_capture"}
         ]
     }, 
     {
@@ -84,14 +103,17 @@ let mercadoPago = [ {
         ]
     },
    {
-        nombre: "LIMITE MP POINT",
+        nombre: "LIMITE DE COBROS CON POINT",
         descripcion: "Esta API nos servirá en caso de que nos consulten si el ITEM tiene B=P",
         url: "https://api.mercadolibre.com/point/services/caps/XXX ",
-        habilitado: false,
+        habilitado: true,
         toke: false,
         requiere: [{
             data: "Ingresa el ID del Usuario"
-        }]
+        }],
+        resultados:[
+            {data: "amount"}
+        ]
     },
     {
         nombre: "TITULARIDAD DE POINT",
@@ -126,13 +148,32 @@ let mercadoVendedor = [{
     funcionamiento: "Ingresa el ID del usuario, para que funcione, debes hacerlo en modo incógnito desde la impersonalización del usuario, recuerda no tener más de una impersonalización activa.",
     descripcion: "Esta herramienta, nos indicará toda la información asociada a la cuenta de un usuario de Mercado Libre",
     url: "https://api.mercadolibre.com/users/XXX?access_token=ZZZ",
-    habilitado: true,
+    habilitado: false,
     token: true,
     requiere: [
         {data: "Ingresa el ID del Usuario"}
     ],
     resultados:[
         {data:""}
+    ]
+},
+
+{
+    nombre: "COMERCIAL",
+    funcionamiento: "Ingresa el DEAL ID, lo podemos tener de Zeus en Item",
+    descripcion: "Permite ver el nombre de la campaña en la cual está el producto.",
+    url: "https://api.mercadolibre.com/deals/XXX",
+    habilitado: true,
+    token: false,
+    requiere: [
+        {data: "Ingresa el ID Deal"}
+    ],
+    resultados:[
+        {data:"status"},
+        {data:"dead_line"},
+        // {data:"end_time"},
+        // {data:"description"},
+        // {data:"name"}
     ]
 },
 
@@ -158,9 +199,7 @@ let mercadoVendedor = [{
     habilitado: false
 }
 ]
-let mercadoShops = [{
-    nombre: ""
-}]
+
 
 /*----------Vue.js--------------*/
 let resultadosObjeto;
@@ -173,10 +212,20 @@ let listMercadoEnvios = new Vue({
         appSelect: '',
         requisitos: [],
         resultado: {},
-        mostrar: false
+        mostrar: false,
+        null: 'No aplica',
+        Cookie: ''
          
     },
     methods: {
+        cookie: function(){
+            chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){
+                this.Cookie = z[0].value
+                console.log(z[0].value)
+                alert(this.Cookie)
+            })
+            
+        },
         clickAyudaMetodo: function() {
             let aux = this.clickAyuda
             this.clickAyuda = !aux
@@ -196,7 +245,7 @@ let listMercadoEnvios = new Vue({
                     }
                     
                     let urlTemporal = this.mercadoEnvios[index].url
-                    let x,y,z
+                    let x,y,z = null;
                             
                     for (let p = 0; p < this.requisitos.length; p++) {
                         if (p == 0) {
@@ -207,33 +256,33 @@ let listMercadoEnvios = new Vue({
                     }
                     
                     if (this.mercadoEnvios[index].token) {
+                        
+                        if (z == null) {
+                            alert("Esta API usa una Cookie")                            
+                        }
                         z = CookieMaster()
-                        if (z == undefined) {
-                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
+                        if (z != null) {
+                            console.log("Cookie encontrada")
                         }
                     }
                      console.log(urlConstructora(urlTemporal,x,y,z))
                     
-                    consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
-                        .then(function(data){ 
-                            for (let i = 0; i < aux2.length; i++) {
-                                let aux3 = aux2[i]
-                                aux[i] = data[aux3]                                
-                            }                            
-                            console.log("este es el valor 1"+ aux)                                     
-                                                     
-                        })
-                        
-                        .catch(function(){
-                            alert("Error en la consulta")
-                        })
+                     fetch(urlConstructora(urlTemporal,x,y,z))
+                     .then(resp => resp.json())
+                     .then(data => {
+                          
+                         for (let i = 0; i < aux2.length; i++) {
+                                         let aux3 = aux2[i]
+                                         aux[i] = data[aux3]                                
+                         }
+                     } ) 
                     
                 }
                 
             }
             setTimeout(() => {
-                console.log("este es el valor 2 "+ aux[0])
-                console.log("llego") 
+                // console.log("este es el valor 2 "+ aux[0])
+                // console.log("llego") 
 
                 for (let index = 0; index < this.mercadoEnvios.length; index++) {
                     if (this.appSelect == this.mercadoEnvios[index].nombre) {
@@ -251,15 +300,9 @@ let listMercadoEnvios = new Vue({
                 this.mostrar = true;    
                                             
             }, 1000);
-
-            
-           
-            
             
         },
-        userid: function(){
-
-        }
+       
     }
 
 })
@@ -312,28 +355,25 @@ let listMercadoEnvios = new Vue({
                             alert("Esta API usa una Cookie, Para usarla primero impersonaliza")                            
                         }
                     }
-                    // console.log(urlConstructora(urlTemporal,x,y,z))
-                    
-                    consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
-                        .then(function(data){ 
+                    console.log(urlConstructora(urlTemporal,x,y,z))
+                    fetch(urlConstructora(urlTemporal,x,y,z))
+                        .then(resp => resp.json())
+                        .then(data => {
+                            console.log(data);                             
                             for (let i = 0; i < aux2.length; i++) {
-                                let aux3 = aux2[i]
-                                aux[i] = data[aux3]                                
-                            }                            
-                            console.log("este es el valor 1"+ aux)                                     
-                                                     
-                        })
-                        
-                        .catch(function(){
-                            alert("Error en la consulta")
-                        })
+                                            let aux3 = aux2[i]
+                                            aux[i] = data[aux3]                                
+                            }
+                        } ) 
                     
+                    
+                                        
                 }
                 
             }
             setTimeout(() => {
-                console.log("este es el valor 2 "+ aux[0])
-                console.log("llego") 
+                // console.log("este es el valor 2 "+ aux[0])
+                // console.log("llego") 
 
                 for (let index = 0; index < this.mercadoVendedor.length; index++) {
                     if (this.appSelect == this.mercadoVendedor[index].nombre) {
@@ -367,103 +407,100 @@ let listMercadoEnvios = new Vue({
      
  let listMercadoPago = new Vue({
      el: '#listAppMp',
-     data: {
+     
+        data: {
 
-        clickAyuda: false,
-        mercadoPago,
-        appSelect: '',
-        requisitos: [],
-        resultado: {},
-        mostrar: false
-         
-    },
-    methods: {
-        clickAyudaMetodo: function() {
-            let aux = this.clickAyuda
-            this.clickAyuda = !aux
-        },
-        consultar: function(){ 
-            let aux = new Array(2);
-            let aux2 = new Array(2);
+            clickAyuda: false,
+            mercadoPago,
+            appSelect: '',
+            requisitos: [],
+            resultado: {},
+            mostrar: false,
+            null: 'No aplica'
              
-            for (let index = 0; index < this.mercadoPago.length; index++) {
-                
-                if (this.appSelect == this.mercadoPago[index].nombre ) {
-
-                    for (let j = 0; j < this.mercadoPago[index].resultados.length; j++) {
-                        aux2[j] = this.mercadoPago[index].resultados[j].data
-                        // console.log(aux2)    
-                        
-                    }
-                    
-                    let urlTemporal = this.mercadoPago[index].url
-                    let x,y,z
-                            
-                    for (let p = 0; p < this.requisitos.length; p++) {
-                        if (p == 0) {
-                            x = this.requisitos[p]
-                        }else{
-                            y = this.requisitos[p]
-                        }                       
-                    }
-                    
-                    if (this.mercadoPago[index].token) {
-                        z = CookieMaster()
-                        if (z == null) {
-                            alert("Esta API usa una Cookie, Para usarla primero impers")                            
-                        }
-                    }
-                    // console.log(urlConstructora(urlTemporal,x,y,z))
-                    
-                    consulta(urlConstructora(urlTemporal,x,y,z),OPTS)
-                        .then(function(data){ 
-                            for (let i = 0; i < aux2.length; i++) {
-                                let aux3 = aux2[i]
-                                aux[i] = data[aux3]                                
-                            }                            
-                            console.log("este es el valor 1"+ aux)                                     
-                                                     
-                        })
-                        
-                        .catch(function(){
-                            alert("Error en la consulta")
-                        })
-                    
-                }
-                
-            }
-            setTimeout(() => {
-                console.log("este es el valor 2 "+ aux[0])
-                console.log("llego") 
-
-                for (let index = 0; index < this.mercadoPago.length; index++) {
-                    if (this.appSelect == this.mercadoPago[index].nombre) {
-                        for (let j = 0; j < this.mercadoPago[index].resultados.length; j++) {
-                            let a = aux2[j]
-                            let b = aux[j]
-                            Vue.set(this.resultado, a,b )
-                        }
-
-                    }
-                    
-                }
-
-                console.log(this.resultado)
-                this.mostrar = true;    
-                                            
-            }, 1000);
-
-            
-           
-            
-            
         },
-        userid: function(){
+        methods: {
+            clickAyudaMetodo: function() {
+                let aux = this.clickAyuda
+                this.clickAyuda = !aux
+            },
+            consultar: function(){ 
+                let aux = new Array(2);
+                let aux2 = new Array(2);
+                 
+                for (let index = 0; index < this.mercadoPago.length; index++) {
+                    
+                    if (this.appSelect == this.mercadoPago[index].nombre ) {
+    
+                        for (let j = 0; j < this.mercadoPago[index].resultados.length; j++) {
+                            aux2[j] = this.mercadoPago[index].resultados[j].data
+                            // console.log(aux2)    
+                            
+                        }
+                        
+                        let urlTemporal = this.mercadoPago[index].url
+                        let x,y,z = null;
+                                
+                        for (let p = 0; p < this.requisitos.length; p++) {
+                            if (p == 0) {
+                                x = this.requisitos[p]
+                            }else{
+                                y = this.requisitos[p]
+                            }                       
+                        }
+                        
+                        if (this.mercadoPago[index].token) {
+                            
+                            if (z == null) {
+                                alert("Esta API usa una Cookie")                            
+                            }
+                            z = CookieMaster()
+                            if (z != null) {
+                                console.log("Cookie encontrada")
+                            }
+                        }
+                         console.log(urlConstructora(urlTemporal,x,y,z))
 
+                fetch(urlConstructora(urlTemporal,x,y,z))
+                        .then(resp => resp.json())
+                        .then(data => {
+                             
+                            for (let i = 0; i < aux2.length; i++) {
+                                            let aux3 = aux2[i]
+                                            aux[i] = data[aux3]                                
+                            }
+                        } )  
+                        
+                                              
+                    }
+                    
+                }
+                setTimeout(() => {
+                    console.log("este es el valor 2 "+ aux[0])
+                    console.log("llego") 
+    
+                    for (let index = 0; index < this.mercadoPago.length; index++) {
+                        if (this.appSelect == this.mercadoPago[index].nombre) {
+                            for (let j = 0; j < this.mercadoPago[index].resultados.length; j++) {
+                                let a = aux2[j]
+                                let b = aux[j]
+                                Vue.set(this.resultado, a,b )
+                            }
+    
+                        }
+                        
+                    }
+    
+                    console.log(this.resultado)
+                    this.mostrar = true;    
+                                                
+                }, 1000);
+                
+            },
+           
         }
-    }
-
-})
+    
+    })
  
  
 
@@ -485,15 +522,4 @@ function CookieMaster(){
     return chrome.cookies.getAll({"domain": ".mercadolibre.com","name": "orgapi"},function(z){console.log(z[0].value)})
 }
 
-const OPTS = { crossDomain: true };
-let promese
 
-function consulta(URL_COMPLETA, OPTS) {
-    promese = new Promise((resolve, reject) => {
-        $.get(URL_COMPLETA, OPTS, function(data) {
-            resolve(data)
-        }).fail(() => reject())
-    })
-
-    return promese
-}

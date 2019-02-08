@@ -51,7 +51,7 @@
                     </template>
                 </template>
                 <br>
-                <button type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
+                <button @click="consultar" type="button" id="ejapi-1" class="btn btn-success btn-sm">Ejecutar API</button></p>
                 <div class="descripcion">
                     <div class="descripcion-inn">
                         <a v-on:click="clickAyudaMetodo" href="#" class="accordion-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
@@ -61,6 +61,14 @@
                                             <p><b>Descripción: </b>{{listDetalle.descripcion}}</p>
                                         </div>
                                     </template>
+                    </div>
+                    <div id="resultados" v-show="mostrar">
+                        <template v-for="(value, key) in resultado">
+    
+                            {{ key }} : {{ value }}
+                            <template v-if="value == null"> {{ key }} : {{ null }}</template>
+                            <br>
+                        </template>
                     </div>
                 </div>
             </div>
